@@ -2,8 +2,9 @@ import csv from 'csv-parser'
 import fs from 'fs'
 const results: unknown[] = []
 
-export function readData () {
-  fs.createReadStream('data.csv')
+export default function readData () {
+  console.log(__dirname)
+  fs.createReadStream(__dirname + '/data/acok.csv')
   .pipe(csv())
   .on('data', (data) => results.push(data))
   .on('end', () => {
