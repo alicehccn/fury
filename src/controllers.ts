@@ -22,8 +22,7 @@ export function getChapters (filename: string, res: Response) {
       })
       .on('end', () => {
         chapters.map((chapter: Chapter) => {
-          characters[chapter.name] = characters[chapter.name] || 1
-          chapter.suffix = characters[chapter.name]
+          chapter.suffix = countIndex(characters, chapter)
           inspectData(chapter)
         })
         res.send(chapters)
@@ -46,4 +45,13 @@ function inspectData(chapter: Chapter) {
   }
   divider += '... ... ... ...   '
   console.log(chapter.name, chapter.suffix, divider, chapter.page)
+}
+
+function countIndex(characters: {key?:string}, chapter: Chapter):number {
+  if (characters[chapter.name]) {
+    characters[chapter.name] += 1
+  } else {
+    characters[chapter.name] = 1
+  }
+  return characters[chapter.name]
 }
