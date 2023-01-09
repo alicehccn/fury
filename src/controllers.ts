@@ -5,22 +5,27 @@ import fs from 'fs'
 interface Chapter {
   name: string
   page: number
+  suffix?: number
 }
 
 export function getChapters (filename: string, res: Response) {
-  if (!filename) {
-    res.send('Book not found')
-  }
-  if (filename === 'favicon.ico') {
-    return
+  if (!filename || filename === 'favicon.ico') {
+    return res.send('Book not found')
   }
   const chapters: Chapter[] = []
+  const characters = {}
   try {
       fs.createReadStream(`${__dirname}/data/${filename}.csv`)
       .pipe(csv())
-      .on('data', (data) => chapters.push(data))
+      .on('data', (data) => {
+        chapters.push(data)
+      })
       .on('end', () => {
-        inspectData(chapters)
+        chapters.map((chapter: Chapter) => {
+          characters[chapter.name] = characters[chapter.name] || 1
+          chapter.suffix = characters[chapter.name]
+          inspectData(chapter)
+        })
         res.send(chapters)
       .on('error', (error) => {
         res.send(error)
@@ -32,15 +37,13 @@ export function getChapters (filename: string, res: Response) {
   
 }
 
-function inspectData(chapters) {
-  chapters.map((chapter) => {
-    let divider = '' ;
-    const minLength = 5
-    const charLen = chapter.name?.length
-    for (let i = 0; i < minLength - charLen + minLength; i++) {
-      divider += ' '
-    }
-    divider += '... ... ... ...   '
-    console.log(chapter.name, divider, chapter.page)
-  })
-} 
+function inspectData(chapter: Chapter) {
+  let divider = '' ;
+  const minLength = 5
+  const charLen = chapter.name?.length
+  for (let i = 0; i < minLength - charLen + minLength; i++) {
+    divider += ' '
+  }
+  divider += '... ... ... ...   '
+  console.log(chapter.name, chapter.suffix, divider, chapter.page)
+}
