@@ -2,7 +2,7 @@ import csv from 'csv-parser'
 import { Response } from 'express'
 import fs from 'fs'
 import path from 'path'
-import { countIndex, romanizeNumber } from './utils'
+import { compileHtml, countIndex, romanizeNumber } from './utils'
 
 export function getChapters (filename: string, res: Response) {
   const book = ['agot', 'acok', 'asos']
@@ -21,7 +21,8 @@ export function getChapters (filename: string, res: Response) {
         chapters.map((chapter: Chapter) => {
           chapter.suffix = romanizeNumber(countIndex(characters, chapter))
         })
-        res.render('index');
+        compileHtml(path.join(__dirname, '../views/index.pug'), chapters)
+        res.render(path.join(__dirname, '../views/index'), {chapters, title: filename.toUpperCase()});
       })
       .on('error', (error) => {
         res.send(error)

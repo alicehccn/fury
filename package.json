@@ -23,6 +23,7 @@
     "eslint-plugin-promise": "^6.0.0"
   },
   "dependencies": {
+    "@types/pug": "^2.0.6",
     "csv-parser": "^3.0.0",
     "express": "^4.17.1",
     "pug": "^3.0.2",

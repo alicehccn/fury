@@ -1,13 +1,5 @@
-export function inspectData(chapter: Chapter) {
-  let divider = '' ;
-  const minLength = 5
-  const charLen = chapter.name?.length
-  for (let i = 0; i < minLength - charLen + minLength; i++) {
-    divider += ' '
-  }
-  divider += '... ... ... ...   '
-  console.log(chapter.name, chapter.suffix, divider, chapter.page)
-}
+import { romanizeNumberMapping } from './constant';
+import pug from 'pug'
 
 export function countIndex(characters: {key?:string}, chapter: Chapter):number {
   if (characters[chapter.name]) {
@@ -19,27 +11,16 @@ export function countIndex(characters: {key?:string}, chapter: Chapter):number {
 }
 
 export function romanizeNumber(num: number) {
-  const roman = {
-    M: 1000,
-    CM: 900,
-    D: 500,
-    CD: 400,
-    C: 100,
-    XC: 90,
-    L: 50,
-    XL: 40,
-    X: 10,
-    IX: 9,
-    V: 5,
-    IV: 4,
-    I: 1
-  };
   let str = '';
-
-  for (const i of Object.keys(roman)) {
-    const q = Math.floor(num / roman[i]);
-    num -= q * roman[i];
+  for (const i of Object.keys(romanizeNumberMapping)) {
+    const q = Math.floor(num / romanizeNumberMapping[i]);
+    num -= q * romanizeNumberMapping[i];
     str += i.repeat(q);
   }
   return str;
+}
+
+export function compileHtml(filename: string, chapters: Chapter[]) {
+  const compile = pug.renderFile(filename, {chapters: chapters});
+  return compile
 }
