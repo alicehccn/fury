@@ -1,12 +1,7 @@
 import csv from 'csv-parser'
 import { Response } from 'express'
 import fs from 'fs'
-
-interface Chapter {
-  name: string
-  page: number
-  suffix?: number
-}
+import { countIndex, inspectData } from './utils'
 
 export function getChapters (filename: string, res: Response) {
   if (!filename || filename === 'favicon.ico') {
@@ -34,24 +29,4 @@ export function getChapters (filename: string, res: Response) {
     res.send(error)
   }
   
-}
-
-function inspectData(chapter: Chapter) {
-  let divider = '' ;
-  const minLength = 5
-  const charLen = chapter.name?.length
-  for (let i = 0; i < minLength - charLen + minLength; i++) {
-    divider += ' '
-  }
-  divider += '... ... ... ...   '
-  console.log(chapter.name, chapter.suffix, divider, chapter.page)
-}
-
-function countIndex(characters: {key?:string}, chapter: Chapter):number {
-  if (characters[chapter.name]) {
-    characters[chapter.name] += 1
-  } else {
-    characters[chapter.name] = 1
-  }
-  return characters[chapter.name]
 }
