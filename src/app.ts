@@ -3,6 +3,8 @@ import { getChapters } from './controllers';
 const app = express();
 const port = 4000;
 
+app.set('view engine', 'pug')
+
 app.get('/:title', (req, res) => {
   const title = req?.params?.title
   getChapters(title, res)

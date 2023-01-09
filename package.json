@@ -7,8 +7,7 @@
     "start": "tsc && node dist/app.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn copyfile && yarn lint && tsc && node dist/app.js",
-    "copyfile": "cp -r src/data/ dist/data"
+    "dev": "yarn lint && tsc && node dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +25,7 @@
   "dependencies": {
     "csv-parser": "^3.0.0",
     "express": "^4.17.1",
+    "pug": "^3.0.2",
     "typescript": "*"
   }
 }
