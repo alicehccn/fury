@@ -9,6 +9,5 @@ app.get('/:title', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('ACOK INDEX');
-  return console.log(`app listening at localhost:${port}`);
+  console.log(`app listening at localhost:${port}`);
 });
