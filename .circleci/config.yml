@@ -62,13 +62,13 @@ commands:
         - run:
             name: Docker Build
             command: |
-              docker build -f ./Dockerfile -t fury .
+              docker build -t fury .
         - run:
             name: Docker Tag
             command: |
-              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/thrive
+              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/fury:latest
         - run:
             name: Docker Push
             command: |
-              docker push alicehccn/fury:latest
+              docker push 686971707721.dkr.ecr.us-west-2.amazonaws.com/fury:latest
 
