@@ -58,7 +58,7 @@ commands:
             name: Docker Login
             command: |
               . venv/bin/activate
-              docker login --username AWS -p $(aws ecr get-login-password --region us-east-1) ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
+              docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com
         - run:
             name: Docker Build
             command: |
@@ -66,9 +66,9 @@ commands:
         - run:
             name: Docker Tag
             command: |
-              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/thrive
+              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/thrive
         - run:
             name: Docker Push
             command: |
-              docker push public.ecr.aws/q9q5y0u8/fury:latest
+              docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/fury:latest
 
