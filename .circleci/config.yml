@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
-  build:
+  install-dependencies:
+    docker:
       - image: node:18-alpine
     working_directory: ~/repo
     steps:
@@ -9,7 +10,7 @@ jobs:
           name: Install Node Packages
           command: |
             yarn install
-  deploy:
+  build-deploy:
     docker:
       - image: circleci/python:3.6.1
         auth:
@@ -27,7 +28,7 @@ workflows:
   version: 2.1
   build-deploy:
     jobs:
-      - lint-and-test
+      - install-dependencies
       - build-deploy:
           filters:
             branches:
@@ -37,7 +38,7 @@ workflows:
             - docker-hub-creds
             - aws-config
           requires:
-            - lint-and-test
+            - install-dependencies
 
 commands:
   install-aws-venv:
