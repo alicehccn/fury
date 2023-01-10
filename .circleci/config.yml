@@ -70,5 +70,5 @@ commands:
         - run:
             name: Docker Push
             command: |
-              docker push fury:latest
+              docker push alicehccn/fury:latest
 
