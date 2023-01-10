@@ -1,6 +1,6 @@
 import path from "path";
 
-export const romanizeNumberMapping = {
+export const RomanizeNumberMapping = {
   M: 1000,
   CM: 900,
   D: 500,
@@ -16,7 +16,22 @@ export const romanizeNumberMapping = {
   I: 1
 };
 
-export const viewPath = path.join(__dirname, '../views/index')
-export const inputFileType = 'csv'
-export const htmlFileType = 'pug'
-export const titles = ['agot', 'acok', 'asos', 'affc', 'adwd']
+export const ViewPath = path.join(__dirname, '../views/index')
+export const InputFileType = 'csv'
+export const HtmlParser = 'pug'
+export const Titles = ['agot', 'acok', 'asos', 'affc', 'adwd']
+
+export const POV = [
+  'Arya',
+  'Sansa',
+  'Tyrion',
+  'Bran',
+  'Arya',
+  'Jon',
+  'Catelyn',
+  'Tyrion',
+  'Arya',
+  'Davos',
+  'Theon',
+  'Deanerys',
+]
