@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path'
 
 export const RomanizeNumberMapping = {
   M: 1000,
@@ -14,7 +14,7 @@ export const RomanizeNumberMapping = {
   V: 5,
   IV: 4,
   I: 1
-};
+}
 
 export const ViewPath = path.join(__dirname, '../views/index')
 export const InputFileType = 'csv'

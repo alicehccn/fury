@@ -23,7 +23,7 @@ export function getChapters (filename: string, res: Response) {
           chapter.suffix = romanizeNumber(countIndex(characters, chapter))
         })
         compileHtml(`${ViewPath}.${HtmlParser}`, chapters)
-        res.render(ViewPath, {chapters, title: filename.toUpperCase()});
+        res.render(ViewPath, {chapters, title: filename.toUpperCase()})
       })
       .on('error', (error) => {
         res.send(error)
