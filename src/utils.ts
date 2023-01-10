@@ -1,4 +1,4 @@
-import { romanizeNumberMapping } from './constant';
+import { romanizeNumberMapping } from './constants';
 import pug from 'pug'
 
 export function countIndex(characters: {key?:string}, chapter: Chapter):number {
