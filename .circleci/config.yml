@@ -46,7 +46,6 @@ commands:
         - run:
             name: Docker Login
             command: |
-              . venv/bin/activate
               docker login --username $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
         - run:
             name: Docker Build
