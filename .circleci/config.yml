@@ -21,7 +21,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout
-      - push-docker-image
+      - build-deploy
 
 workflows:
   version: 2.1
@@ -40,23 +40,19 @@ workflows:
             - install-dependencies
 
 commands:
-  push-docker-image:
+  build-deploy:
       description: "Build Docker Image"
       steps:
         - run:
             name: Docker Login
             command: |
               . venv/bin/activate
-              docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com
+              docker login --username $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
         - run:
             name: Docker Build
             command: |
-              docker build -t fury .
-        - run:
-            name: Docker Tag
-            command: |
-              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/fury:latest
+              docker build . -t alicehccn/fury:latest --platform linux/amd64
         - run:
             name: Docker Push
             command: |
-              docker push 686971707721.dkr.ecr.us-west-2.amazonaws.com/fury:latest
+              docker push alicehccn/fury:latest
