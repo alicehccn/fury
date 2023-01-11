@@ -1,0 +1,62 @@
+version: 2.1
+jobs:
+  install-dependencies:
+    docker:
+      - image: node:18-alpine
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install Node Packages
+          command: |
+            yarn install
+  build-deploy:
+    docker:
+      - image: circleci/python:3.6.1
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+    working_directory: ~/repo
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - push-docker-image
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - install-dependencies
+      - build-deploy:
+          filters:
+            branches:
+              only:
+                - main
+          context:
+            - docker-hub-creds
+            - aws-config
+          requires:
+            - install-dependencies
+
+commands:
+  push-docker-image:
+      description: "Build Docker Image"
+      steps:
+        - run:
+            name: Docker Login
+            command: |
+              . venv/bin/activate
+              docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com
+        - run:
+            name: Docker Build
+            command: |
+              docker build -t fury .
+        - run:
+            name: Docker Tag
+            command: |
+              docker tag fury:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/fury:latest
+        - run:
+            name: Docker Push
+            command: |
+              docker push 686971707721.dkr.ecr.us-west-2.amazonaws.com/fury:latest
