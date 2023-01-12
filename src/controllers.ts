@@ -1,35 +1,22 @@
-import { HtmlParser, InputFileType, Titles, ViewPath } from './constants'
-import csv from 'csv-parser'
+import { Titles } from './constants'
 import { Response } from 'express'
 import fs from 'fs'
-import path from 'path'
-import { compileHtml, countIndex, romanizeNumber } from './utils'
 
-export function getChapters (filename: string, res: Response) {
+export function getChaptersByTitle (filename: string, res: Response) {
   if (Titles.indexOf(filename) < 0) {
     return res.send('Book not found')
   }
-  const chapters: Chapter[] = []
-  const characters = {}
-
   try {
-    fs.createReadStream(path.join(__dirname, `../${filename}.${InputFileType}`))
-      .pipe(csv())
-      .on('data', (data) => {
-        chapters.push(data)
-      })
-      .on('end', () => {
-        chapters.map((chapter: Chapter) => {
-          chapter.suffix = romanizeNumber(countIndex(characters, chapter))
-        })
-        compileHtml(`${ViewPath}.${HtmlParser}`, chapters)
-        res.render(ViewPath, {chapters, title: filename.toUpperCase()})
-      })
-      .on('error', (error) => {
-        res.send(error)
-      })
+    fs.readFile(`data/${filename}.json`, 'utf8', function (err, data) {
+      if (err) throw err
+      const chapters = JSON.parse(data)
+      res.send(chapters)
+    })
   } catch (error) {
     res.send(error)
   }
+}
+
+export function getChaptersByCharacter(character, res) {
   
 }

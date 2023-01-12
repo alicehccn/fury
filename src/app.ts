@@ -1,15 +1,20 @@
 import express from 'express'
-import path from 'path'
-import { getChapters } from './controllers'
+import { getChaptersByTitle } from './controllers'
 const app = express()
 const port = 4000
 
-app.set('views', path.join(__dirname, '../views/index.pug'))
-app.set('view engine', 'pug')
+app.get('/', (req, res) => {
+  res.send({})
+})
 
-app.get('/:title', (req, res) => {
+app.get('/title/:title', (req, res) => {
   const title = req?.params?.title
-  getChapters(title, res)
+  getChaptersByTitle(title, res)
+})
+
+app.get('/character/:character', (req, res) => {
+  const character = req?.params.character
+  
 })
 
 app.listen(port, () => {
