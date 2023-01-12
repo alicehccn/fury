@@ -1,6 +1,7 @@
 import { Titles } from './constants'
 import { Response } from 'express'
 import fs from 'fs'
+import * as service from './services'
 
 export function getChaptersByTitle (filename: string, res: Response) {
   if (Titles.indexOf(filename) < 0) {
@@ -17,6 +18,11 @@ export function getChaptersByTitle (filename: string, res: Response) {
   }
 }
 
-export function getChaptersByCharacter(character, res) {
-  
+export async function getChaptersByCharacter(name: string, res: Response) {
+  try {
+    const chapters = await service.getChaptersByCharacter(name)
+    res.send(chapters)
+  } catch (error) {
+    res.send(error)
+  }
 }
