@@ -9,7 +9,8 @@ html
   body
     div(style="text-align: center; margin: 2em")
       for val, key in chapters
-        h2=key.toUpperCase()
+        h2
+          a(href='/' + key)=key.toUpperCase()
         table(class='table')
           each chapter in val
             tr(style='text-align: left;')

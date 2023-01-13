@@ -27,7 +27,7 @@ export async function getAllCharacters() {
 export async function getChaptersByCharacter(name: string) {
   const pool = createPool()
   const result = await pool.query(
-    'SELECT * FROM chapters WHERE name = $1 ORDER BY title', [name],
+    'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name],
   )
   const chaptersPerTitle = {}
   result.rows.forEach((row) => {
