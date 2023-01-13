@@ -28,6 +28,14 @@ export async function getChaptersByCharacter(name: string) {
   const pool = createPool()
   const result = await pool.query(
     'SELECT * FROM chapters WHERE name = $1 ORDER BY title', [name],
-  ) 
-  return result.rows
+  )
+  const chaptersPerTitle = {}
+  result.rows.forEach((row) => {
+    if (chaptersPerTitle[row.title]) {
+      chaptersPerTitle[row.title].push(row)
+    } else {
+      chaptersPerTitle[row.title] = [row]
+    }
+  })
+  return chaptersPerTitle
 }

@@ -6,7 +6,7 @@ import pug from 'pug'
 export async function getAllTitles (res: Response) {
   try {
     const titles = await service.getAllTitles()
-    const html = pug.renderFile(path.join(__dirname, '../views/index.pug'), {titles: titles})
+    const html = pug.renderFile(path.join(__dirname, '../views/index.pug'), {titles})
     res.send(html)
   } catch(error) {
     res.send(error)
@@ -16,7 +16,8 @@ export async function getAllTitles (res: Response) {
 export async function getChaptersByTitle (title: string, res: Response) {
   try {
     const chapters = await service.getChaptersByTitle(title)
-    res.send(chapters)
+    const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {header: title, chapters})
+    res.send(html)
   } catch(error) {
     res.send(error)
   }
@@ -34,7 +35,8 @@ export async function getAllCharacters (res: Response) {
 export async function getChaptersByCharacter(name: string, res: Response) {
   try {
     const chapters = await service.getChaptersByCharacter(name)
-    res.send(chapters)
+    const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters})
+    res.send(html)
   } catch (error) {
     res.send(error)
   }

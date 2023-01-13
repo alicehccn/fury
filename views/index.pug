@@ -7,11 +7,9 @@ html
       integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
       crossorigin='anonymous')
   body
-    h1 A Song of Ice and Fire
-    ul
-      each title in titles
-        li
-          a(href='/'+title.slug)=title.title
-
-    
-
+    div(style="text-align: center")
+      h1 A Song of Ice and Fire
+      ul
+        each title in titles
+          li
+            a(href='/'+title.slug)=title.title
