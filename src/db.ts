@@ -2,10 +2,10 @@ import { Pool } from 'pg'
 
 export function createPool() {
   return new Pool({
-    user: 'alicehuang',
+    user: 'postgres',
     database: 'fury',
-    password: 'nebula',
-    port: 4000,
+    password: 'postgres',
+    port: 5432,
     host: 'localhost',
   })
 }

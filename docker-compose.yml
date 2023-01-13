@@ -2,7 +2,7 @@ version: "3.8"
 services:
   app:
     image: alicehccn/fury:latest
-    command: sh -c "yarn install && yarn start"
+    command: sh -c "yarn install && yarn tsc && yarn start"
     ports:
       - 4000:4000
     working_dir: /app
@@ -13,10 +13,11 @@ services:
     image: postgres:latest
     restart: always
     ports:
-        - 5432:5432
+      - 5432:5432
     environment: 
-      POSTGRES_USER: alicehuang
-      POSTGRES_PASSWORD: nebula
-      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fury
     volumes:
-      - /var/lib/postgresql:/var/lib/postgresql
+      - ./:/app
+      

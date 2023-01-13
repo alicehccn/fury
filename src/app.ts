@@ -22,6 +22,6 @@ app.get('/character/:character', (req, res) => {
   getChaptersByCharacter(character, res)
 })
 
-app.listen(port, () => {
+app.listen(port, async() => {
   console.log(`app listening at localhost:${port}`)
 })
