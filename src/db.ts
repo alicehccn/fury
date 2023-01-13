@@ -5,7 +5,7 @@ export function createPool() {
     user: 'alicehuang',
     database: 'fury',
     password: 'nebula',
-    port: 5432,
+    port: 4000,
     host: 'localhost',
   })
 }
