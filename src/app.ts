@@ -1,17 +1,14 @@
 import express from 'express'
+
 import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles } from './controllers'
 const app = express()
 const port = 4000
 
 app.get('/', (req, res) => {
-  res.send()
-})
-
-app.get('/titles', (req, res) => {
   getAllTitles(res)
 })
 
-app.get('/chapters/:title', (req, res) => {
+app.get('/:title', (req, res) => {
   const title = req?.params?.title
   getChaptersByTitle(title, res)
 })

@@ -1,10 +1,13 @@
 import { Response } from 'express'
 import * as service from './services'
+import path from 'path'
+import pug from 'pug'
 
 export async function getAllTitles (res: Response) {
   try {
     const titles = await service.getAllTitles()
-    res.send(titles)
+    const html = pug.renderFile(path.join(__dirname, '../views/index.pug'), {titles: titles})
+    res.send(html)
   } catch(error) {
     res.send(error)
   }
