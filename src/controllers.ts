@@ -1,19 +1,29 @@
-import { Titles } from './constants'
 import { Response } from 'express'
-import fs from 'fs'
 import * as service from './services'
 
-export function getChaptersByTitle (filename: string, res: Response) {
-  if (Titles.indexOf(filename) < 0) {
-    return res.send('Book not found')
-  }
+export async function getAllTitles (res: Response) {
   try {
-    fs.readFile(`data/${filename}.json`, 'utf8', function (err, data) {
-      if (err) throw err
-      const chapters = JSON.parse(data)
-      res.send(chapters)
-    })
-  } catch (error) {
+    const titles = await service.getAllTitles()
+    res.send(titles)
+  } catch(error) {
+    res.send(error)
+  }
+}
+
+export async function getChaptersByTitle (title: string, res: Response) {
+  try {
+    const chapters = await service.getChaptersByTitle(title)
+    res.send(chapters)
+  } catch(error) {
+    res.send(error)
+  }
+}
+
+export async function getAllCharacters (res: Response) {
+  try {
+    const characters = await service.getAllCharacters()
+    res.send(characters)
+  } catch(error) {
     res.send(error)
   }
 }
