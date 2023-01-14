@@ -15,8 +15,7 @@ export async function getAllTitles (res: Response) {
 export async function getChaptersByTitle (title: string, res: Response) {
   try {
     const chapters = await service.getChaptersByTitle(title)
-    const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {header: title, chapters})
-    res.send(html)
+    res.send(chapters)
   } catch(error) {
     res.send(error)
   }

@@ -8,8 +8,7 @@ html
       crossorigin='anonymous')
   body
     div(style="text-align: center; margin: 2em")
-      h2
-        a(href='/' + header)=header.toUpperCase()
+      h2=title.toUpperCase()
       table(class='table')
         each chapter in chapters
           tr(style='text-align: left;')

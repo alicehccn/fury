@@ -4,10 +4,6 @@ import path from 'path'
 import { createPool } from './db'
 
 export async function getAllTitles () {
-  // const pool = createPool()
-  // const result = await pool.query(
-  //   'SELECT * FROM titles ORDER BY slug'
-  // )
   const data = await fs.readFile('data/titles.json')
   const titles = JSON.parse(Buffer.from(data).toString())
   const html = pug.renderFile(path.join(__dirname, '../views/index.pug'), {titles})
@@ -15,11 +11,10 @@ export async function getAllTitles () {
 }
 
 export async function getChaptersByTitle (title: string) {
-  const pool = createPool()
-  const result = await pool.query(
-    'SELECT * FROM chapters WHERE title = $1 ORDER BY page', [title]
-  ) 
-  return result.rows
+  const data = await fs.readFile(`data/${title}.json`)
+  const chapters = JSON.parse(Buffer.from(data).toString())
+  const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {title, chapters})
+  return html
 }
 
 export async function getAllCharacters() {
