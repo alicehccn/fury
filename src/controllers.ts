@@ -6,8 +6,7 @@ import pug from 'pug'
 export async function getAllTitles (res: Response) {
   try {
     const titles = await service.getAllTitles()
-    const html = pug.renderFile(path.join(__dirname, '../views/index.pug'), {titles})
-    res.send(html)
+    res.send(titles)
   } catch(error) {
     res.send(error)
   }
