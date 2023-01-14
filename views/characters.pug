@@ -8,11 +8,9 @@ html
       crossorigin='anonymous')
   body
     div(style="text-align: center; margin: 2em")
-      for val, key in chapters
-        h2=key.toUpperCase()
-        table(class='table')
-          each chapter in val
-            tr(style='text-align: left;')
-              td(style='width: 100px')=chapter.name
-              td=chapter.suffix
-              td(style='text-align: right;')=chapter.page
+    table(class='table' style='text-align:center')
+      each character in characters
+        tr
+          td(style='text-align:left')
+            a(href='/character/'+character.name)=character.name
+          td=character.name

@@ -18,11 +18,10 @@ export async function getChaptersByTitle (title: string) {
 }
 
 export async function getAllCharacters() {
-  const pool = createPool()
-  const result = await pool.query(
-    'SELECT * FROM characters ORDER BY name'
-  ) 
-  return result.rows
+  const data = await fs.readFile('data/characters.json')
+  const characters = JSON.parse(Buffer.from(data).toString())
+  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters})
+  return html
 }
 
 export async function getChaptersByCharacter(name: string) {
