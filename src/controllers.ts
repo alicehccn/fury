@@ -33,8 +33,7 @@ export async function getAllCharacters (res: Response) {
 export async function getChaptersByCharacter(name: string, res: Response) {
   try {
     const chapters = await service.getChaptersByCharacter(name)
-    const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters})
-    res.send(html)
+    res.send(chapters)
   } catch (error) {
     res.send(error)
   }
