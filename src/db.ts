@@ -13,6 +13,15 @@ export function createPool() {
 }
 const pool = createPool()
 
+export async function createDB() {
+  try {
+    await pool.query(
+      'CREATE DATABASE fury;'
+    )
+  } catch (error) {
+    // console.log(error.details)
+  }
+}
 
 export async function createTables () {
   try {
@@ -45,7 +54,7 @@ export async function createTables () {
       )`
     )
   } catch (error) {
-    console.log(error.detail)
+    // console.log(error.detail)
   }
 }
 
@@ -59,7 +68,7 @@ export async function createTitles () {
       )
       createChapters(t.slug)
     } catch(error) {
-      console.log(error.detail)
+      // console.log(error.detail)
     }
   })
 }
@@ -74,7 +83,7 @@ export async function createChapters (slug: string) {
         'INSERT INTO chapters (id, name, suffix, page, title) VALUES ($1, $2, $3, $4, $5)', [randomUUID(), chapter.name, chapter.suffix, chapter.page, slug]
       ) 
     } catch (error) {
-      console.log(error.detail)
+      // console.log(error.detail)
     }
   })
 }
@@ -99,7 +108,7 @@ export async function createCharacters () {
         'INSERT INTO characters (id, name) VALUES ($1, $2)', [randomUUID(), character]
       )
     } catch (error) {
-      console.log(error.detail)
+      // console.log(error.detail)
     }
   })
 }
