@@ -8,7 +8,7 @@ export function createPool() {
     database: 'fury',
     password: 'postgres',
     port: 5432,
-    host: '192.168.0.108',
+    host: '146.190.60.119',
   })
 }
 const pool = createPool()
