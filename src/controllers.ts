@@ -1,7 +1,5 @@
 import { Response } from 'express'
 import * as service from './services'
-import path from 'path'
-import pug from 'pug'
 
 export async function getAllTitles (res: Response) {
   try {

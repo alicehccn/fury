@@ -172,7 +172,7 @@
 {
 "name": "Catelyn",
 "page": "392",
-"suffix": ""
+"suffix": "IV"
 },
 {
 "name": "Davos",
@@ -217,7 +217,7 @@
 {
 "name": "Catelyn",
 "page": "514",
-"suffix": "IV"
+"suffix": "V"
 },
 {
 "name": "Samwell",
@@ -237,7 +237,7 @@
 {
 "name": "Catelyn",
 "page": "555",
-"suffix": "V"
+"suffix": "VI"
 },
 {
 "name": "Arya",
@@ -247,12 +247,12 @@
 {
 "name": "Catelyn",
 "page": "574",
-"suffix": "VI"
+"suffix": "VII"
 },
 {
 "name": "Arya",
 "page": "584",
-"suffix": ""
+"suffix": "X"
 },
 {
 "name": "Tyrion",
@@ -312,7 +312,7 @@
 {
 "name": "Arya",
 "page": "726",
-"suffix": "X"
+"suffix": "XI"
 },
 {
 "name": "Tyrion",
@@ -357,7 +357,7 @@
 {
 "name": "Arya",
 "page": "843",
-"suffix": "XI"
+"suffix": "XII"
 },
 {
 "name": "Samwell",
