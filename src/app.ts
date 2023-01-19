@@ -1,4 +1,5 @@
 import express from 'express'
+import { createTables } from './db'
 
 import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles } from './controllers'
 const app = express()
@@ -23,5 +24,7 @@ app.get('/character/:character', (req, res) => {
 })
 
 app.listen(port, async() => {
+  createTables()
+
   console.log(`app listening at localhost:${port}`)
 })

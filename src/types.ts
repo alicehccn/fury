@@ -4,3 +4,8 @@ interface Chapter {
   page: number
   suffix?: string
 }
+
+interface Title {
+  title: string
+  slug: string
+}
