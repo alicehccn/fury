@@ -24,9 +24,9 @@ app.get('/character/:character', (req, res) => {
 })
 
 app.listen(port, async() => {
-  createDB()
-  createTables()
-  createTitles()
-  createCharacters()
+  await createDB()
+  await createTables()
+  await createTitles()
+  await createCharacters()
   console.log(`app listening at localhost:${port}`)
 })
