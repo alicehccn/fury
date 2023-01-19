@@ -1,5 +1,5 @@
 import express from 'express'
-import { createCharacters, createTables, createTitles } from './db'
+import { createCharacters, createDB, createTables, createTitles } from './db'
 
 import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles } from './controllers'
 const app = express()
@@ -24,6 +24,7 @@ app.get('/character/:character', (req, res) => {
 })
 
 app.listen(port, async() => {
+  createDB()
   createTables()
   createTitles()
   createCharacters()
