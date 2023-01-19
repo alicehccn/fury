@@ -5,23 +5,13 @@ import { randomUUID } from 'crypto'
 export function createPool() {
   return new Pool({
     user: 'postgres',
-    database: 'fury',
+    database: 'postgres',
     password: 'postgres',
     port: 5432,
     host: '146.190.60.119',
   })
 }
 const pool = createPool()
-
-export async function createDB() {
-  try {
-    await pool.query(
-      'CREATE DATABASE fury;'
-    )
-  } catch (error) {
-    // console.log(error.details)
-  }
-}
 
 export async function createTables () {
   try {
