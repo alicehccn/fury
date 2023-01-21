@@ -32,7 +32,7 @@ export async function getAllCharacters() {
 export async function getChaptersByCharacter(name: string) {
   const pool = createPool()
   const result = await pool.query(
-    'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name],
+    'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name]
   )
   const chaptersPerTitle = {}
   result.rows.forEach((row) => {
@@ -44,4 +44,12 @@ export async function getChaptersByCharacter(name: string) {
   })
   const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters: chaptersPerTitle})
   return html
+}
+
+export async function updateChapterSuffix(id: string, suffix: string) {
+  const pool = createPool()
+  const result = await pool.query(
+    'UPDATE chapters SET suffix = $1 WHERE id = $2', [suffix, id]
+  )
+  return result
 }
