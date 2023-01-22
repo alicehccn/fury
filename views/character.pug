@@ -11,7 +11,7 @@ html
     div(style='text-align: center; margin: 2em .5em;')
       for val, key in chapters
         h2
-          a(href='/'+key)=key.toUpperCase()
+          a(href='/title/'+key)=key.toUpperCase()
         table(class='table')
           each chapter in val
             tr(style='text-align: left;')

@@ -46,10 +46,14 @@ export async function getChaptersByCharacter(name: string) {
   return html
 }
 
-export async function updateChapterSuffix(id: string, suffix: string) {
+export async function deleteChapter(id: string) {
   const pool = createPool()
-  const result = await pool.query(
-    'UPDATE chapters SET suffix = $1 WHERE id = $2', [suffix, id]
-  )
-  return result
+  try {
+    const result = await pool.query(
+      'DELETE FROM chapters WHERE id = $1', [id]
+    )
+    return `Delete ${result.rowCount} row(s)`
+  } catch (error) {
+    return error
+  }
 }

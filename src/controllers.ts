@@ -37,11 +37,17 @@ export async function getChaptersByCharacter(name: string, res: Response) {
   }
 }
 
-export async function updateChapterSuffix(chapterId: string, suffix: string, res: Response) {
+export async function deleteChapter(id: string, res: Response) {
   try {
-    const result = await service.updateChapterSuffix(chapterId, suffix)
+    const result = await service.deleteChapter(id)
     res.send(result)
   } catch (error) {
     res.send(error)
   }
 }
+
+// export async function addChapter()
+// export async function deleteChapter()
+
+
+
