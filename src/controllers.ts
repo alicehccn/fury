@@ -46,8 +46,11 @@ export async function deleteChapter(id: string, res: Response) {
   }
 }
 
-// export async function addChapter()
-// export async function deleteChapter()
-
-
-
+export async function addChapter(name: string, suffix: string, page: string | number, title: string, res: Response) {
+  try {
+    const result = await service.addChapter(name, suffix, page, title)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}

@@ -1,6 +1,7 @@
 import pug from 'pug'
 import path from 'path'
 import { createPool } from './db'
+import { randomUUID } from 'crypto'
 
 export async function getAllTitles () {
   const pool = createPool()
@@ -14,7 +15,7 @@ export async function getAllTitles () {
 export async function getChaptersByTitle (title: string) {
   const pool = createPool()
   const result = await pool.query(
-    'SELECT * FROM chapters WHERE title = $1', [title]
+    'SELECT * FROM chapters WHERE title = $1 ORDER BY page', [title]
   )
   const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {title, chapters: result.rows})
   return html
@@ -53,6 +54,18 @@ export async function deleteChapter(id: string) {
       'DELETE FROM chapters WHERE id = $1', [id]
     )
     return `Delete ${result.rowCount} row(s)`
+  } catch (error) {
+    return error
+  }
+}
+
+export async function addChapter(name: string, suffix: string, page: number | string, title: string) {
+  const pool = createPool()
+  try {
+    const result = await pool.query(
+      'INSERT INTO chapters (id, name, suffix, page, title) values($1, $2, $3, $4, $5)', [randomUUID(), name, suffix, page, title]
+    )
+    return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error
   }
