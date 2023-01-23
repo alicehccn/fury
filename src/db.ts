@@ -32,7 +32,7 @@ export async function createTables () {
           suffix VARCHAR(50),
           page INT,
           title VARCHAR(50),
-        UNIQUE(page, title)
+        UNIQUE(title, suffix, title)
       )`
     )
     await pool.query(
