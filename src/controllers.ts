@@ -54,3 +54,21 @@ export async function addChapter(name: string, suffix: string, page: string | nu
     return error
   }
 }
+
+export async function addTitle(name: string, res: Response) {
+  try {
+    const result = await service.addTitle(name)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteTitle(id: string, res: Response) {
+  try {
+    const result = await service.deleteTitle(id)
+    res.send(result)
+  } catch (error) {
+    res.send(error)
+  }
+}

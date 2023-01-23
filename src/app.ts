@@ -1,6 +1,6 @@
 import express from 'express'
 import { createCharacters, createTables, createTitles } from './db'
-import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles, deleteChapter, addChapter } from './controllers'
+import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles, deleteChapter, addChapter, addTitle, deleteTitle } from './controllers'
 
 const app = express()
 const port = 4000
@@ -31,6 +31,16 @@ app.delete('/chapter/:id', (req, res) => {
 app.post('/chapter', (req, res) => {
   const {name, suffix, page, title} = req.query
   addChapter(name as string, suffix as string, page as string, title as string, res)
+})
+
+app.post('/title', (req, res) => {
+  const { name } = req.query
+  addTitle(name as string, res)
+})
+
+app.delete('/title/:id', (req, res) => {
+  const id = req?.params.id
+  deleteTitle(id, res)
 })
 
 app.listen(port, async() => {

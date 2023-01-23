@@ -8,6 +8,7 @@ interface Chapter {
 }
 
 interface Title {
+  id?: string,
   title: string
   slug: string
 }
