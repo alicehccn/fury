@@ -55,6 +55,11 @@ app.delete('/character/:slug', (req, res) => {
   controller.deleteCharacter(slug, res)
 })
 
+app.patch('/character', (req, res) => {
+  const {oldName, newName} = req.query
+  controller.updateCharacter(oldName as string, newName as string, res)
+})
+
 app.listen(port, async() => {
   await createTables()
   await createTitles()

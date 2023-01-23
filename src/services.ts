@@ -72,6 +72,21 @@ export async function addChapter(name: string, suffix: string, page: number | st
   }
 }
 
+export async function updateCharacter(oldName: string, newName: string) {
+  const pool = createPool()
+  try {
+    const chapter = await pool.query(
+      'UPDATE chapters SET name = $1 WHERE name = $2', [newName, oldName]
+    )
+    const character = await pool.query(
+      'UPDATE characters SET name = $1 WHERE name = $2', [newName, oldName]
+    )
+    return `Updated ${character.rowCount} character in ${chapter.rowCount} chapter(s)`
+  } catch (error) {
+    return error
+  }
+}
+
 export async function addTitle(name: string) {
   const pool = createPool()
   try {

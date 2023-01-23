@@ -55,6 +55,15 @@ export async function addChapter(name: string, suffix: string, page: string | nu
   }
 }
 
+export async function updateCharacter(oldName: string, newName: string, res: Response) {
+  try {
+    const result = await service.updateCharacter(oldName, newName)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}
+
 export async function addTitle(name: string, res: Response) {
   try {
     const result = await service.addTitle(name)
