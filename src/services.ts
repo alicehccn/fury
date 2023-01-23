@@ -48,11 +48,11 @@ export async function getChaptersByCharacter(name: string) {
   return html
 }
 
-export async function deleteChapter(name: string, suffix: string, title: string) {
+export async function deleteChapter(page: string | number, title: string) {
   const pool = createPool()
   try {
     const result = await pool.query(
-      'DELETE FROM chapters WHERE name = $1 AND suffix = $2 AND title = $3', [name, suffix, title]
+      'DELETE FROM chapters WHERE page = $1 AND title = $2', [page, title]
     )
     return `Delete ${result.rowCount} row(s)`
   } catch (error) {

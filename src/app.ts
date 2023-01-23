@@ -23,11 +23,9 @@ app.get('/character/:name', (req, res) => {
   controller.getChaptersByCharacter(character, res)
 })
 
-app.delete('/chapter/:name-:suffix-:title', (req, res) => {
-  const name = req?.params.name
-  const suffix = req?.params.suffix
-  const title = req?.params.title
-  controller.deleteChapter(name, suffix, title, res)
+app.delete('/chapter', (req, res) => {
+  const { page, title } = req.query
+  controller.deleteChapter(page as string, title as string, res)
 })
 
 app.post('/chapter', (req, res) => {

@@ -37,9 +37,9 @@ export async function getChaptersByCharacter(name: string, res: Response) {
   }
 }
 
-export async function deleteChapter(name: string, suffix: string, title: string, res: Response) {
+export async function deleteChapter(page: string | number, title: string, res: Response) {
   try {
-    const result = await service.deleteChapter(name, suffix, title)
+    const result = await service.deleteChapter(page, title)
     res.send(result)
   } catch (error) {
     res.send(error)

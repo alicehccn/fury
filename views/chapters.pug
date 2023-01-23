@@ -13,7 +13,7 @@ html
       table(class='table')
         each chapter in chapters
           tr(style='text-align: left;')
-            td(style='width: 100px')
+            td
               if chapter.suffix
                 a(href='/character/' + chapter.name)=chapter.name
               else
