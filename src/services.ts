@@ -2,7 +2,7 @@ import pug from 'pug'
 import path from 'path'
 import { createPool } from './db'
 import { randomUUID } from 'crypto'
-import { toKebabCase } from './utils'
+import { romanizedInt, toKebabCase } from './utils'
 
 export async function getAllTitles () {
   const pool = createPool()
@@ -60,9 +60,13 @@ export async function deleteChapter(page: string | number, title: string) {
   }
 }
 
-export async function addChapter(name: string, suffix: string, page: number | string, title: string) {
+export async function addChapter(name: string, page: number | string, title: string) {
   const pool = createPool()
   try {
+    const temp = await pool.query(
+      'SELECT * FROM chapters WHERE title = $1 AND name = $2', [title, name]
+    )
+    const suffix = romanizedInt(temp.rowCount)
     const result = await pool.query(
       'INSERT INTO chapters (id, name, suffix, page, title) values($1, $2, $3, $4, $5)', [randomUUID(), name, suffix, page, title]
     )

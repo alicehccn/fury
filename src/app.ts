@@ -29,8 +29,8 @@ app.delete('/chapter', (req, res) => {
 })
 
 app.post('/chapter', (req, res) => {
-  const {name, suffix, page, title} = req.query
-  controller.addChapter(name as string, suffix as string, page as string, title as string, res)
+  const {name, page, title} = req.query
+  controller.addChapter(name as string, page as string, title as string, res)
 })
 
 app.post('/title', (req, res) => {

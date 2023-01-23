@@ -46,9 +46,9 @@ export async function deleteChapter(page: string | number, title: string, res: R
   }
 }
 
-export async function addChapter(name: string, suffix: string, page: string | number, title: string, res: Response) {
+export async function addChapter(name: string, page: string | number, title: string, res: Response) {
   try {
-    const result = await service.addChapter(name, suffix, page, title)
+    const result = await service.addChapter(name, page, title)
     res.send(result)
   } catch (error) {
     return error
