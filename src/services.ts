@@ -48,11 +48,11 @@ export async function getChaptersByCharacter(name: string) {
   return html
 }
 
-export async function deleteChapter(id: string) {
+export async function deleteChapter(name: string, suffix: string, title: string) {
   const pool = createPool()
   try {
     const result = await pool.query(
-      'DELETE FROM chapters WHERE id = $1', [id]
+      'DELETE FROM chapters WHERE name = $1 AND suffix = $2 AND title = $3', [name, suffix, title]
     )
     return `Delete ${result.rowCount} row(s)`
   } catch (error) {
@@ -95,3 +95,28 @@ export async function deleteTitle(slug: string) {
     return error
   }
 }
+
+export async function addCharacter(name: string) {
+  const pool = createPool()
+  try {
+    const result = await pool.query(
+      'INSERT INTO characters (id, name) values($1, $2)', [randomUUID(), name]
+    )
+    return `Added ${result.rowCount} row(s)`
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteCharacter(name: string) {
+  const pool = createPool()
+  try {
+    const result = await pool.query(
+      'DELETE FROM characters WHERE name = $1', [name]
+    )
+  return `Delete ${result.rowCount} row(s)`
+} catch (error) {
+    return error
+  }
+}
+

@@ -1,46 +1,58 @@
 import express from 'express'
 import { createCharacters, createTables, createTitles } from './db'
-import { getAllCharacters, getChaptersByCharacter, getChaptersByTitle, getAllTitles, deleteChapter, addChapter, addTitle, deleteTitle } from './controllers'
+import * as controller from './controllers'
 
 const app = express()
 const port = 4000
 
 app.get('/', (req, res) => {
-  getAllTitles(res)
+  controller.getAllTitles(res)
 })
 
 app.get('/title/:title', (req, res) => {
   const title = req?.params.title
-  getChaptersByTitle(title, res)
+  controller.getChaptersByTitle(title, res)
 })
 
 app.get('/characters', (req, res) => {
-  getAllCharacters(res)
+  controller.getAllCharacters(res)
 })
 
 app.get('/character/:name', (req, res) => {
   const character = req?.params.name
-  getChaptersByCharacter(character, res)
+  controller.getChaptersByCharacter(character, res)
 })
 
-app.delete('/chapter/:id', (req, res) => {
-  const id = req?.params.id
-  deleteChapter(id, res)
+app.delete('/chapter/:name-:suffix-:title', (req, res) => {
+  const name = req?.params.name
+  const suffix = req?.params.suffix
+  const title = req?.params.title
+  controller.deleteChapter(name, suffix, title, res)
 })
 
 app.post('/chapter', (req, res) => {
   const {name, suffix, page, title} = req.query
-  addChapter(name as string, suffix as string, page as string, title as string, res)
+  controller.addChapter(name as string, suffix as string, page as string, title as string, res)
 })
 
 app.post('/title', (req, res) => {
   const { name } = req.query
-  addTitle(name as string, res)
+  controller.addTitle(name as string, res)
 })
 
 app.delete('/title/:slug', (req, res) => {
   const slug = req?.params.slug
-  deleteTitle(slug, res)
+  controller.deleteTitle(slug, res)
+})
+
+app.post('/character', (req, res) => {
+  const { name } = req.query
+  controller.addCharacter(name as string, res)
+})
+
+app.delete('/character/:slug', (req, res) => {
+  const slug = req?.params.slug
+  controller.deleteCharacter(slug, res)
 })
 
 app.listen(port, async() => {
