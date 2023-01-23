@@ -28,3 +28,21 @@ export function romanizedInt(num: number) {
   string += map[num % 10]
   return string
 }
+
+export function isPOV (character: string) {
+   return [
+    'Arya',
+    'Samwell',
+    'Bran',
+    'Tyrion',
+    'Jaime',
+    'Jon',
+    'Davos',
+    'Catelyn',
+    'Theon',
+    'Daenerys',
+    'Cersei',
+    'Alayne',
+    'Reek',
+  ].indexOf(character) > -1
+}
