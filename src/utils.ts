@@ -27,21 +27,3 @@ export function romanizedInt(num: number) {
   }
   return string
 }
-
-export function isPOV (character: string) {
-   return [
-    'Arya',
-    'Samwell',
-    'Bran',
-    'Tyrion',
-    'Jaime',
-    'Jon',
-    'Davos',
-    'Catelyn',
-    'Theon',
-    'Daenerys',
-    'Cersei',
-    'Alayne',
-    'Reek',
-  ].indexOf(character) > -1
-}
