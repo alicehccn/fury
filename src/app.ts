@@ -56,8 +56,13 @@ app.delete('/character/:slug', (req, res) => {
 })
 
 app.patch('/character', (req, res) => {
-  const {oldName, newName} = req.query
+  const { oldName, newName } = req.query
   controller.updateCharacter(oldName as string, newName as string, res)
+})
+
+app.patch('/chapter', (req, res) => {
+  const { name, suffix } = req.query
+  controller.updateSuffix(name as string, suffix as string, res)
 })
 
 app.listen(port, async() => {

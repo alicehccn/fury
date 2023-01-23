@@ -72,6 +72,18 @@ export async function addChapter(name: string, suffix: string, page: number | st
   }
 }
 
+export async function updateSuffix(name: string, suffix: string) {
+  const pool = createPool()
+  try {
+    const result = await pool.query(
+      'UPDATE chapters SET suffix = $1 WHERE name = $2', [suffix, name]
+    )
+    return `Updated ${result.rowCount} row(s)`
+  } catch (error) {
+    return error
+  }
+}
+
 export async function updateCharacter(oldName: string, newName: string) {
   const pool = createPool()
   try {

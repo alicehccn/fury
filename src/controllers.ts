@@ -99,3 +99,12 @@ export async function deleteCharacter(slug: string, res: Response) {
     res.send(error)
   }
 }
+
+export async function updateSuffix(name: string, suffix: string, res: Response) {
+  try {
+    const result = await service.updateSuffix(name, suffix)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}
