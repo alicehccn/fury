@@ -21,11 +21,10 @@ export function romanizedInt(num: number) {
   }
   num += 1
   const times = Math.floor(num / 10)
-  let string = ''
-  if (times > 0) {
-    string += 'X'.repeat(times)
+  let string = map[10].repeat(times)
+  if (map[num % 10]) {
+    string += map[num % 10]
   }
-  string += map[num % 10]
   return string
 }
 
