@@ -84,14 +84,14 @@ export async function addTitle(name: string) {
   }
 }
 
-export async function deleteTitle(id: string) {
+export async function deleteTitle(slug: string) {
   const pool = createPool()
   try {
     const result = await pool.query(
-      'DELETE FROM titles WHERE id = $1', [id]
+      'DELETE FROM titles WHERE slug = $1', [slug]
     )
-    return `Delete ${result.rowCount} row(s)`
-  } catch (error) {
+  return `Delete ${result.rowCount} row(s)`
+} catch (error) {
     return error
   }
 }

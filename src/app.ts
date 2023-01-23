@@ -38,9 +38,9 @@ app.post('/title', (req, res) => {
   addTitle(name as string, res)
 })
 
-app.delete('/title/:id', (req, res) => {
-  const id = req?.params.id
-  deleteTitle(id, res)
+app.delete('/title/:slug', (req, res) => {
+  const slug = req?.params.slug
+  deleteTitle(slug, res)
 })
 
 app.listen(port, async() => {

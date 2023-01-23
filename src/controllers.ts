@@ -64,9 +64,9 @@ export async function addTitle(name: string, res: Response) {
   }
 }
 
-export async function deleteTitle(id: string, res: Response) {
+export async function deleteTitle(slug: string, res: Response) {
   try {
-    const result = await service.deleteTitle(id)
+    const result = await service.deleteTitle(slug)
     res.send(result)
   } catch (error) {
     res.send(error)
