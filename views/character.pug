@@ -1,9 +1,9 @@
 html
   include head
   body
-    div(style='text-align: center; margin: 2em .5em;')
+    div(class='mt-5' style='text-align: center;')
       for val, key in chapters
-        h2
+        h5
           a(href='/title/'+key)=key.toUpperCase()
         table(class='table')
           each chapter in val

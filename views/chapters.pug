@@ -1,9 +1,11 @@
 html
   include head
   body
-    div(class='mt-5' style='text-align: left;')
+    div(class='mt-5')
       div(class='pl-3 mb-3')
         a(href='/') <<
+      div(style='text-align: center;')
+        h5=title.toUpperCase()
       table(class='table mt-2')
         each chapter in chapters
           tr(style='text-align: left;')
