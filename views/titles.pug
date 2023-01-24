@@ -1,0 +1,12 @@
+html
+  head
+    include head
+  body
+    div(style='text-align: center; vertical-align: bottom;position: fixed; bottom: 0; width: 100%;')
+      h1(class='page-header mb-5') Books of Ice and Fire
+      table(class='table' style='text-align:center;')
+        each title in titles
+          tr
+            td(style='text-align:left')=title.slug.toUpperCase()
+            td(style='text-align:right')
+              a(href='/title/'+title.slug)=title.title
