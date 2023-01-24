@@ -38,7 +38,7 @@ export async function getChaptersByTitle (title: string) {
 
 export async function getAllCharacters() {
   try {
-      const result = await pool.query(
+    const result = await pool.query(
       'SELECT * FROM characters'
     )
     return result
@@ -50,8 +50,8 @@ export async function getAllCharacters() {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(
-    'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name]
-  )
+      'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name]
+    )
     return result
   } catch (error) {
     return error
@@ -125,8 +125,8 @@ export async function deleteCharacter(name: string) {
     const result = await pool.query(
       'DELETE FROM characters WHERE name = $1', [name]
     )
-  return result
-} catch (error) {
+    return result
+  } catch (error) {
     return error
   }
 }

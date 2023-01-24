@@ -88,7 +88,7 @@ export async function deleteCharacter(name: string) {
     const result = await db.deleteCharacter(name)
     return `Delete ${result.rowCount} row(s)`
   } catch (error) {
-      return error
+    return error
   }
 }
 
