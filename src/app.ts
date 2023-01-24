@@ -23,10 +23,6 @@ app.get('/character/:name', (req, res) => {
   controller.getChaptersByCharacter(character, res)
 })
 
-app.delete('/chapter', (req, res) => {
-  const { page, title } = req.query
-  controller.deleteChapter(page as string, title as string, res)
-})
 
 app.post('/chapter', (req, res) => {
   const {name, page, title} = req.query
@@ -38,29 +34,24 @@ app.post('/title', (req, res) => {
   controller.addTitle(name as string, res)
 })
 
-app.delete('/title/:slug', (req, res) => {
-  const slug = req?.params.slug
-  controller.deleteTitle(slug, res)
-})
-
 app.post('/character', (req, res) => {
   const { name } = req.query
   controller.addCharacter(name as string, res)
 })
 
+app.delete('/title/:slug', (req, res) => {
+  const slug = req?.params.slug
+  controller.deleteTitle(slug, res)
+})
+
+app.delete('/chapter', (req, res) => {
+  const { page, title } = req.query
+  controller.deleteChapter(page as string, title as string, res)
+})
+
 app.delete('/character/:slug', (req, res) => {
   const slug = req?.params.slug
   controller.deleteCharacter(slug, res)
-})
-
-app.patch('/character', (req, res) => {
-  const { oldName, newName } = req.query
-  controller.updateCharacter(oldName as string, newName as string, res)
-})
-
-app.patch('/chapter', (req, res) => {
-  const { name, suffix } = req.query
-  controller.updateSuffix(name as string, suffix as string, res)
 })
 
 app.listen(port, async() => {

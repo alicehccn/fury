@@ -1,6 +1,7 @@
 import { Pool } from 'pg'
 import fs from 'fs/promises'
 import { randomUUID } from 'crypto'
+import { toKebabCase } from './utils'
 
 export function createPool() {
   return new Pool({
@@ -12,6 +13,126 @@ export function createPool() {
   })
 }
 const pool = createPool()
+
+export async function getAllTitles () {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM titles'
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getChaptersByTitle (title: string) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM chapters WHERE title = $1 ORDER BY page', [title]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getAllCharacters() {
+  try {
+      const result = await pool.query(
+      'SELECT * FROM characters'
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getChaptersByCharacter(name: string) {
+  try {
+    const result = await pool.query(
+    'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name]
+  )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getAppearances(name: string, title: string) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM chapters WHERE title = $1 AND name = $2', [title, name]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteChapter(page: string | number, title: string) {
+  try {
+    const result = await pool.query(
+      'DELETE FROM chapters WHERE page = $1 AND title = $2', [page, title]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function addTitle(name: string) {
+  const result = await pool.query(
+    'INSERT INTO titles (id, title, slug) values($1, $2, $3)', [randomUUID(), name, toKebabCase(name)]
+  )
+  return result
+}
+
+export async function addChapter(name: string, suffix: string, page: number | string, title: string) {
+  try {
+    const result = await pool.query(
+      'INSERT INTO chapters (id, name, suffix, page, title) values($1, $2, $3, $4, $5)', [randomUUID(), name, suffix, page, title]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteTitle(slug: string) {
+  try {
+    const result = await pool.query(
+      'DELETE FROM titles WHERE slug = $1', [slug]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function addCharacter(name: string) {
+  try {
+    const result = await pool.query(
+      'INSERT INTO characters (id, name) values($1, $2)', [randomUUID(), name]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function deleteCharacter(name: string) {
+  try {
+    const result = await pool.query(
+      'DELETE FROM characters WHERE name = $1', [name]
+    )
+  return result
+} catch (error) {
+    return error
+  }
+}
+
+
+// Utils //
 
 export async function createTables () {
   try {

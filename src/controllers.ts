@@ -55,15 +55,6 @@ export async function addChapter(name: string, page: string | number, title: str
   }
 }
 
-export async function updateCharacter(oldName: string, newName: string, res: Response) {
-  try {
-    const result = await service.updateCharacter(oldName, newName)
-    res.send(result)
-  } catch (error) {
-    return error
-  }
-}
-
 export async function addTitle(name: string, res: Response) {
   try {
     const result = await service.addTitle(name)
@@ -99,12 +90,4 @@ export async function deleteCharacter(slug: string, res: Response) {
     res.send(error)
   }
 }
-
-export async function updateSuffix(name: string, suffix: string, res: Response) {
-  try {
-    const result = await service.updateSuffix(name, suffix)
-    res.send(result)
-  } catch (error) {
-    return error
-  }
-}
+ 
