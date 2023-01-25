@@ -9,9 +9,10 @@ export async function getAllTitles () {
   return html
 }
 
-export async function getChaptersByTitle (title: string) {
-  const result = await db.getChaptersByTitle(title)
-  const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {title, chapters: result.rows})
+export async function getChaptersByTitle (slug: string) {
+  const result = await db.getChaptersByTitle(slug)
+  const title = await db.getTitleBySlug(slug)
+  const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {title: title.rows[0].title, chapters: result.rows})
   return html
 }
 

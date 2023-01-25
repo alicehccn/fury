@@ -14,6 +14,17 @@ export function createPool() {
 }
 const pool = createPool()
 
+export async function getTitleBySlug(slug: string) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM titles where slug = $1', [slug]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getAllTitles () {
   try {
     const result = await pool.query(

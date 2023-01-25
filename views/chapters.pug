@@ -2,14 +2,14 @@ html
   include head
   body
     div(class='mt-5')
-      div(class='pl-3 mb-3')
+      div(class='pl-3')
         a(href='/') <<
       div(style='text-align: center;')
-        h5=title.toUpperCase()
+        h5=title
       table(class='table mt-2')
         each chapter in chapters
           tr(style='text-align: left;')
-            td
+            td(style='width: 30%')
               if chapter.suffix
                 a(href='/character/' + chapter.name)=chapter.name
               else
