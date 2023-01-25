@@ -5,9 +5,9 @@ html
       for val, key in chapters
         h5
           a(href='/title/'+key)=key.toUpperCase()
-        table(class='table')
+        table(class='table mt-3')
           each chapter in val
             tr(style='text-align: left;')
-              td(style='width: 30%')=chapter.name
+              td(style='width: 70%')=chapter.name
               td=chapter.suffix
               td(style='text-align: right;')=chapter.page

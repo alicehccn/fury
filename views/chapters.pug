@@ -6,10 +6,10 @@ html
         a(href='/') <<
       div(style='text-align: center;')
         h5=title
-      table(class='table mt-2')
+      table(class='table mt-3')
         each chapter in chapters
           tr(style='text-align: left;')
-            td(style='width: 30%')
+            td(style='width: 70%')
               if chapter.suffix
                 a(href='/character/' + chapter.name)=chapter.name
               else
