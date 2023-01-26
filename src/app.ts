@@ -1,6 +1,8 @@
 import express from 'express'
 import { createCharacters, createTables, createTitles } from './db'
 import * as controller from './controllers'
+import path from 'path'
+import pug  from 'pug'
 
 const app = express()
 const port = 4000
@@ -52,6 +54,11 @@ app.delete('/chapter', (req, res) => {
 app.delete('/character/:slug', (req, res) => {
   const slug = req?.params.slug
   controller.deleteCharacter(slug, res)
+})
+
+app.get('/test', (req, res) => {
+  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'))
+  res.send(html)
 })
 
 app.listen(port, async() => {
