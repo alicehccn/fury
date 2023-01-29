@@ -36,6 +36,17 @@ export async function getAllTitles () {
   }
 }
 
+export async function getAllChapters() {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM chapters'
+    )
+    return result
+  } catch(error) {
+    return error
+  }
+}
+
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(
@@ -142,6 +153,16 @@ export async function deleteCharacter(name: string) {
   }
 }
 
+export async function addAudible(audible: Audible) {
+  try {
+    await pool.query(
+      'INSERT INTO audibles (id, chapter, type, url) VALUES ($1, $2, $3, $4)', [randomUUID(), audible.chapter, audible.type, audible.url]
+    )
+  } catch (error) {
+    // console.log(error.detail)
+  }
+}
+
 
 // Utils //
 
@@ -175,11 +196,24 @@ export async function createTables () {
         UNIQUE(name)
       )`
     )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        audibles (
+          id VARCHAR(50) PRIMARY KEY,
+          chapter VARCHAR(50),
+          type VARCHAR(50),
+          url VARCHAR(50),
+        UNIQUE(chapter, url)
+      )`
+    )
   } catch (error) {
     // console.log(error.detail)
   }
 }
 
+//////////////
+// OUTDATED //
+//////////////
 export async function createTitles () {
   const data = await fs.readFile('data/titles.json')
   const titles = JSON.parse(Buffer.from(data).toString())

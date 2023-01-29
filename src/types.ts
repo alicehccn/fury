@@ -12,3 +12,10 @@ interface Title {
   title: string
   slug: string
 }
+
+interface Audible {
+  id?: string,
+  chapter: string,
+  type: string,
+  url: string,
+}

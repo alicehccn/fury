@@ -1,5 +1,5 @@
 import express from 'express'
-import { createCharacters, createTables, createTitles } from './db'
+import * as service from './services'
 import * as controller from './controllers'
 import path from 'path'
 import pug  from 'pug'
@@ -57,13 +57,11 @@ app.delete('/character/:slug', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'))
+  const html = pug.renderFile(path.join(__dirname, '../views/input.pug'))
   res.send(html)
 })
 
 app.listen(port, async() => {
-  await createTables()
-  await createTitles()
-  await createCharacters()
+  await service.createAudibles()
   console.log(`app listening at localhost:${port}`)
 })

@@ -25,7 +25,7 @@ export async function getAllCharacters() {
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
   const chaptersPerTitle = {}
-  result.rows.forEach((row) => {
+  result.rows.forEach((row: Title) => {
     if (chaptersPerTitle[row.title]) {
       chaptersPerTitle[row.title].push(row)
     } else {
@@ -90,6 +90,22 @@ export async function deleteCharacter(name: string) {
     return `Delete ${result.rowCount} row(s)`
   } catch (error) {
     return error
+  }
+}
+
+export async function createAudibles() {
+  try {
+    const chapters = await db.getAllChapters()
+    chapters.rows.map((chapter: Chapter) => {
+      const audible = {
+        chapter: chapter.id,
+        type: 'youtube',
+        url: ''
+      }
+      db.addAudible(audible)
+    })
+  } catch (error) {
+
   }
 }
 
