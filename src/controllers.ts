@@ -28,6 +28,15 @@ export async function getAllCharacters (res: Response) {
   }
 }
 
+export async function getAllAudibles (res: Response) {
+  try {
+    const audibles = await service.getAllAudibles()
+    res.send(audibles)
+  } catch(error) {
+    res.send(error)
+  }
+}
+
 export async function getChaptersByCharacter(name: string, res: Response) {
   try {
     const chapters = await service.getChaptersByCharacter(name)

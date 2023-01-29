@@ -22,6 +22,12 @@ export async function getAllCharacters() {
   return html
 }
 
+export async function getAllAudibles () {
+  const result = await db.getAllAudibles()
+  console.log(result.rowCount)
+  return result.rows
+}
+
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
   const chaptersPerTitle = {}
@@ -105,7 +111,7 @@ export async function createAudibles() {
       db.addAudible(audible)
     })
   } catch (error) {
-
+    return error
   }
 }
 

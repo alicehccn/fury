@@ -47,6 +47,17 @@ export async function getAllChapters() {
   }
 }
 
+export async function getAllAudibles() {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM audibles'
+    )
+    return result
+  } catch(error) {
+    return error
+  }
+}
+
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(
@@ -162,7 +173,6 @@ export async function addAudible(audible: Audible) {
     // console.log(error.detail)
   }
 }
-
 
 // Utils //
 

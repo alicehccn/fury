@@ -1,8 +1,10 @@
 import express from 'express'
 import * as service from './services'
+import * as db from './db'
 import * as controller from './controllers'
 import path from 'path'
 import pug  from 'pug'
+
 
 const app = express()
 const port = 4000
@@ -61,7 +63,12 @@ app.get('/test', (req, res) => {
   res.send(html)
 })
 
+app.get('/audibles', (req, res) => {
+  controller.getAllAudibles(res)
+})
+
 app.listen(port, async() => {
-  await service.createAudibles()
+  // await db.createTables()
+  // await service.createAudibles()
   console.log(`app listening at localhost:${port}`)
 })
