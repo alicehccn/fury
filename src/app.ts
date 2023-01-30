@@ -1,9 +1,5 @@
 import express from 'express'
-import * as service from './services'
-import * as db from './db'
 import * as controller from './controllers'
-import path from 'path'
-import pug  from 'pug'
 
 
 const app = express()
@@ -58,9 +54,9 @@ app.delete('/character/:slug', (req, res) => {
   controller.deleteCharacter(slug, res)
 })
 
-app.get('/test', (req, res) => {
-  const html = pug.renderFile(path.join(__dirname, '../views/input.pug'))
-  res.send(html)
+app.get('/:slug/edit', async (req, res) => {
+  const slug = req?.params.slug
+  controller.editTitle(slug, res)
 })
 
 app.listen(port, async() => {

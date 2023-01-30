@@ -19,6 +19,15 @@ export async function getChaptersByTitle (title: string, res: Response) {
   }
 }
 
+export async function editTitle (title: string, res: Response) {
+  try {
+    const chapters = await service.editTitle(title)
+    res.send(chapters)
+  } catch(error) {
+    res.send(error)
+  }
+}
+
 export async function getAllCharacters (res: Response) {
   try {
     const characters = await service.getAllCharacters()

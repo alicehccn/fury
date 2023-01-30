@@ -16,6 +16,12 @@ export async function getChaptersByTitle (slug: string) {
   return html
 }
 
+export async function editTitle (slug: string) {
+  const result = await db.getChaptersByTitle(slug)
+  const html = pug.renderFile(path.join(__dirname, '../views/editor.pug'), {title: slug, chapters: result.rows})
+  return html
+}
+
 export async function getAllCharacters() {
   const result = await db.getAllCharacters()
   const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: result.rows})

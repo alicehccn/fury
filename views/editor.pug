@@ -1,0 +1,12 @@
+html
+  include head
+  body
+    div(class='mt-5' style='width:100%; text-align:center;')
+      each chapter in chapters
+        form(class="form" action='/chapter/'+chapter.id, method='PATCH')
+          input(class="" type='text' name='name' value=chapter.name)
+          input(class="ml-2" type='text' name='name' value=chapter.suffix)
+          input(class="ml-2" type='text' name='name' value=chapter.page)
+          input(class="ml-2" type='text' name='url' value=chapter.url)
+          input(class="ml-2" type='submit', value='Save')
+
