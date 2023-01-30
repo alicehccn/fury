@@ -19,3 +19,7 @@ interface Audible {
   type: string,
   url: string,
 }
+
+interface AudibleChapter extends Chapter {
+  url?: string,
+}

@@ -60,8 +60,14 @@ export async function getAllAudibles() {
 
 export async function getChaptersByTitle (title: string) {
   try {
-    const result = await pool.query(
-      'SELECT * FROM chapters WHERE title = $1 ORDER BY page', [title]
+    const result = await pool.query(`
+      SELECT *
+      FROM chapters chapter
+      INNER JOIN audibles audible
+      ON chapter.id = audible.chapter
+      WHERE chapter.title = $1
+      ORDER BY chapter.page`,
+    [title]
     )
     return result
   } catch (error) {

@@ -63,12 +63,6 @@ app.get('/test', (req, res) => {
   res.send(html)
 })
 
-app.get('/audibles', (req, res) => {
-  controller.getAllAudibles(res)
-})
-
 app.listen(port, async() => {
-  // await db.createTables()
-  // await service.createAudibles()
   console.log(`app listening at localhost:${port}`)
 })

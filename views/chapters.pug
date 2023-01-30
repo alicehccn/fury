@@ -14,5 +14,9 @@ html
                 a(href='/character/' + chapter.name)=chapter.name
               else
                 span=chapter.name
-            td=chapter.suffix
+            td
+              if chapter.url
+                a(href=chapter.url)=chapter.suffix
+              else
+                span=chapter.suffix
             td(style='text-align: right;')=chapter.page
