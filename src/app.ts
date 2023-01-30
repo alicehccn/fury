@@ -54,7 +54,7 @@ app.delete('/character/:slug', (req, res) => {
   controller.deleteCharacter(slug, res)
 })
 
-app.get('/:slug/edit', async (req, res) => {
+app.get('/title/:slug/edit', async (req, res) => {
   const slug = req?.params.slug
   controller.editTitle(slug, res)
 })
