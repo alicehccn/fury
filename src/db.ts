@@ -176,11 +176,11 @@ export async function deleteCharacter(name: string) {
 export async function addIdentity (characterId: string, identity: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO identities (id, name, characterId) VALUES ($1, $2, $3)', [randomUUID(), identity, characterId]
+      'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), identity, characterId]
     )
     return result
   } catch (error) {
-    // console.log(error.detail)
+    return error
   }
 }
 
