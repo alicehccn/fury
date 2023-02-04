@@ -1,3 +1,4 @@
+import * as db from './db'
 import express from 'express'
 import * as controller from './controllers'
 
@@ -24,40 +25,40 @@ app.get('/character/:name', (req, res) => {
 })
 
 
-app.post('/chapter', (req, res) => {
+app.post('/chapter/new', (req, res) => {
   const {name, page, title} = req.query
   controller.addChapter(name as string, page as string, title as string, res)
 })
 
-app.post('/title', (req, res) => {
+app.post('/title/new', (req, res) => {
   const { name } = req.query
   controller.addTitle(name as string, res)
 })
 
-app.post('/character', (req, res) => {
+app.post('/character/new', (req, res) => {
   const { name } = req.query
   controller.addCharacter(name as string, res)
 })
 
-app.delete('/title/:slug', (req, res) => {
-  const slug = req?.params.slug
-  controller.deleteTitle(slug, res)
+app.post('/identity/new', (req, res) => {
+  const { character, identity } = req.query
+  controller.addIdentity(character as string, identity as string, res)
 })
 
-app.delete('/chapter', (req, res) => {
-  const { page, title } = req.query
-  controller.deleteChapter(page as string, title as string, res)
-})
+// app.delete('/title/:slug', (req, res) => {
+//   const slug = req?.params.slug
+//   controller.deleteTitle(slug, res)
+// })
 
-app.delete('/character/:slug', (req, res) => {
-  const slug = req?.params.slug
-  controller.deleteCharacter(slug, res)
-})
+// app.delete('/chapter', (req, res) => {
+//   const { page, title } = req.query
+//   controller.deleteChapter(page as string, title as string, res)
+// })
 
-app.get('/title/:slug/edit', async (req, res) => {
-  const slug = req?.params.slug
-  controller.editTitle(slug, res)
-})
+// app.delete('/character/:slug', (req, res) => {
+//   const slug = req?.params.slug
+//   controller.deleteCharacter(slug, res)
+// })
 
 app.listen(port, async() => {
   console.log(`app listening at localhost:${port}`)

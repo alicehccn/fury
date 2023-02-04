@@ -19,15 +19,6 @@ export async function getChaptersByTitle (title: string, res: Response) {
   }
 }
 
-export async function editTitle (title: string, res: Response) {
-  try {
-    const chapters = await service.editTitle(title)
-    res.send(chapters)
-  } catch(error) {
-    res.send(error)
-  }
-}
-
 export async function getAllCharacters (res: Response) {
   try {
     const characters = await service.getAllCharacters()
@@ -99,4 +90,12 @@ export async function deleteCharacter(slug: string, res: Response) {
     res.send(error)
   }
 }
- 
+
+export async function addIdentity (character: string, identity: string, res: Response) {
+  try {
+    const result = await service.addIdentity(character, identity)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}

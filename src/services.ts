@@ -16,12 +16,6 @@ export async function getChaptersByTitle (slug: string) {
   return html
 }
 
-export async function editTitle (slug: string) {
-  const result = await db.getChaptersByTitle(slug)
-  const html = pug.renderFile(path.join(__dirname, '../views/editor.pug'), {title: slug, chapters: result.rows})
-  return html
-}
-
 export async function getAllCharacters() {
   const result = await db.getAllCharacters()
   const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: result.rows})
@@ -99,19 +93,11 @@ export async function deleteCharacter(name: string) {
   }
 }
 
-export async function createAudibles() {
+export async function addIdentity (character: string, identity: string) {
   try {
-    const chapters = await db.getAllChapters()
-    chapters.rows.map((chapter: Chapter) => {
-      const audible = {
-        chapter: chapter.id,
-        type: 'youtube',
-        url: ''
-      }
-      db.addAudible(audible)
-    })
+    const result = await db.addIdentity(character, identity)
+    return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error
   }
 }
-

@@ -13,13 +13,7 @@ interface Title {
   slug: string
 }
 
-interface Audible {
+interface Character {
   id?: string,
-  chapter: string,
-  type: string,
-  url: string,
-}
-
-interface AudibleChapter extends Chapter {
-  url?: string,
+  name: string,
 }

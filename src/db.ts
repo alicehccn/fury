@@ -47,17 +47,6 @@ export async function getAllChapters() {
   }
 }
 
-export async function getAllAudibles() {
-  try {
-    const result = await pool.query(
-      'SELECT * FROM audibles'
-    )
-    return result
-  } catch(error) {
-    return error
-  }
-}
-
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(`
@@ -77,6 +66,17 @@ export async function getAllCharacters() {
   try {
     const result = await pool.query(
       'SELECT * FROM characters'
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getCharacterByName(name: string) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM characters WHERE name = $1', [name]
     )
     return result
   } catch (error) {
@@ -168,11 +168,19 @@ export async function deleteCharacter(name: string) {
   }
 }
 
-export async function addAudible(audible: Audible) {
+
+export async function addIdentity (character: string, identity: string) {
   try {
-    await pool.query(
-      'INSERT INTO audibles (id, chapter, type, url) VALUES ($1, $2, $3, $4)', [randomUUID(), audible.chapter, audible.type, audible.url]
-    )
+    const characterRow = await getCharacterByName(character)
+    const characterId = characterRow.rows[0]?.id
+    if (characterId) {
+      const result = await pool.query(
+        'INSERT INTO identities (id, name, characterId) VALUES ($1, $2, $3)', [randomUUID(), identity, characterId]
+      )
+      return result
+    } else {
+      return characterRow
+    }
   } catch (error) {
     // console.log(error.detail)
   }
@@ -212,12 +220,11 @@ export async function createTables () {
     )
     await pool.query(
       `CREATE TABLE IF NOT EXISTS
-        audibles (
+        identities (
           id VARCHAR(50) PRIMARY KEY,
-          chapter VARCHAR(50),
-          type VARCHAR(50),
-          url VARCHAR(50),
-        UNIQUE(chapter, url)
+          name VARCHAR(50),
+          characterId VARCHAR(50),
+        UNIQUE(name, characterId)
       )`
     )
   } catch (error) {
@@ -276,6 +283,19 @@ export async function createCharacters () {
     try {
       await pool.query(
         'INSERT INTO characters (id, name) VALUES ($1, $2)', [randomUUID(), character]
+      )
+    } catch (error) {
+      // console.log(error.detail)
+    }
+  })
+}
+
+export async function createIdentities () {
+  const characters = await getAllCharacters()
+  characters.rows.map(async (character: Character) => {
+    try {
+      await pool.query(
+        'INSERT INTO identities (id, name, characterId) VALUES ($1, $2, $3)', [randomUUID(), character.name, character.id]
       )
     } catch (error) {
       // console.log(error.detail)
