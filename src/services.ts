@@ -93,9 +93,15 @@ export async function deleteCharacter(name: string) {
   }
 }
 
-export async function addIdentity (character: string, identity: string) {
+export async function addIdentity (name: string, identity: string) {
   try {
-    const result = await db.addIdentity(character, identity)
+    const character = await db.getCharacterByName(name)
+    const characterId = character?.rows[0]?.id
+    if (!characterId) {
+      console.log('Character not found')
+      return ('Character not found')
+    }
+    const result = await db.addIdentity(characterId, identity)
     return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error
