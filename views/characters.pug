@@ -4,8 +4,11 @@ html
   body
     div(style='text-align: center; margin: 2em .5em;')
     table(class='table' style='text-align:center')
-      each character in characters
-        tr
-          td(style='text-align:left')
-            a(href='/character/'+character.name)=character.name
-          td=character.identity
+      for val, key in characters
+        tr(style='text-align:left')
+          td
+            a(href='/character/'+key)=key
+          td
+            each id in val
+              p=id
+            

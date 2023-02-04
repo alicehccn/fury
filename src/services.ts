@@ -20,13 +20,13 @@ export async function getAllCharacters() {
   const result = await db.getAllCharacters()
   const characters = {}
   result.rows.forEach((ch: Character) => {
-    if (characters[ch.name]) {
-      characters[ch.name].push(ch.identities)
+    if (characters[ch.name] && ch.identity) {
+      characters[ch.name].push(ch.identity)
     } else {
-      characters[ch.name] = ch.identities
+      characters[ch.name] = ch.identity ? [ch.identity] : ''
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: result.rows})
+  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: characters})
   return html
 }
 
