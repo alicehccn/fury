@@ -65,7 +65,7 @@ export async function getChaptersByTitle (title: string) {
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`
-      SELECT ch.name, id.identity
+      SELECT ch.*, id.identity
       FROM identities id 
       RIGHT JOIN characters ch
       ON id.character = ch.id
@@ -88,10 +88,10 @@ export async function getCharacterByName(name: string) {
   }
 }
 
-export async function getChaptersByCharacter(name: string) {
+export async function getChaptersByCharacter(id: string) {
   try {
     const result = await pool.query(
-      'SELECT * FROM chapters WHERE name = $1 ORDER BY page', [name]
+      'SELECT * FROM chapters WHERE character = $1 ORDER BY page', [id]
     )
     return result
   } catch (error) {

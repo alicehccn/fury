@@ -31,7 +31,8 @@ export async function getAllCharacters() {
 }
 
 export async function getChaptersByCharacter(name: string) {
-  const result = await db.getChaptersByCharacter(name)
+  const characterId = await db.getCharacterByName(name)
+  const result = await db.getChaptersByCharacter(characterId?.rows[0]?.id)
   const chaptersPerTitle = {}
   result.rows.forEach((row: Title) => {
     if (chaptersPerTitle[row.title]) {

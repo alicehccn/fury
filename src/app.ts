@@ -45,21 +45,6 @@ app.post('/identity/new', (req, res) => {
   controller.addIdentity(character as string, identity as string, res)
 })
 
-// app.delete('/title/:slug', (req, res) => {
-//   const slug = req?.params.slug
-//   controller.deleteTitle(slug, res)
-// })
-
-// app.delete('/chapter', (req, res) => {
-//   const { page, title } = req.query
-//   controller.deleteChapter(page as string, title as string, res)
-// })
-
-// app.delete('/character/:slug', (req, res) => {
-//   const slug = req?.params.slug
-//   controller.deleteCharacter(slug, res)
-// })
-
 app.listen(port, async() => {
   console.log(`app listening at localhost:${port}`)
 })
