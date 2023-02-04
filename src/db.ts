@@ -64,9 +64,13 @@ export async function getChaptersByTitle (title: string) {
 
 export async function getAllCharacters() {
   try {
-    const result = await pool.query(
-      'SELECT * FROM characters'
-    )
+    const result = await pool.query(`
+      SELECT ch.name, id.identity
+      FROM identities id 
+      RIGHT JOIN characters ch
+      ON id.character = ch.id
+      ORDER BY ch.name
+    `)
     return result
   } catch (error) {
     return error

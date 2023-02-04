@@ -18,6 +18,14 @@ export async function getChaptersByTitle (slug: string) {
 
 export async function getAllCharacters() {
   const result = await db.getAllCharacters()
+  const characters = {}
+  result.rows.forEach((ch: Character) => {
+    if (characters[ch.name]) {
+      characters[ch.name].push(ch.identities)
+    } else {
+      characters[ch.name] = ch.identities
+    }
+  })
   const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: result.rows})
   return html
 }

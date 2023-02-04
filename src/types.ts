@@ -16,4 +16,5 @@ interface Title {
 interface Character {
   id?: string,
   name: string,
+  identities?: string[]
 }
