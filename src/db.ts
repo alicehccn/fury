@@ -90,8 +90,12 @@ export async function getCharacterByName(name: string) {
 
 export async function getChaptersByCharacter(id: string) {
   try {
-    const result = await pool.query(
-      'SELECT * FROM chapters WHERE character = $1 ORDER BY page', [id]
+    const result = await pool.query(`
+      SELECT chp.*
+      FROM chapters chp
+      WHERE chp.character = $1
+      ORDER BY chp.page
+    `,[id]
     )
     return result
   } catch (error) {
