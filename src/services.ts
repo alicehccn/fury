@@ -20,10 +20,11 @@ export async function getAllCharacters() {
   const result = await db.getAllCharacters()
   const characters = {}
   result.rows.forEach((ch: Character) => {
-    if (characters[ch.name] && ch.identity) {
-      characters[ch.name].push(ch.identity)
+    const character = `${ch.name} ${ch.house}`
+    if (characters[character] && ch.identity) {
+      characters[character].push(ch.identity)
     } else {
-      characters[ch.name] = ch.identity ? [ch.identity] : ''
+      characters[character] = ch.identity ? [ch.identity] : ''
     }
   })
   const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: characters})

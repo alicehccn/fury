@@ -7,9 +7,9 @@ html
       for val, key in characters
         tr(style='text-align:left')
           td
-            a(href='/character/'+key)=key
+            a(href='/character/'+key.split(' ')[0])=key
           td
             each ch in val
-              if ch !== key
+              if key.indexOf(ch) < 0
                 p=ch
             
