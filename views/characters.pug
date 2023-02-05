@@ -9,6 +9,7 @@ html
           td
             a(href='/character/'+key)=key
           td
-            each id in val
-              p=id
+            each ch in val
+              if ch !== key
+                p=ch
             

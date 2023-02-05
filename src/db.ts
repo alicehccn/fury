@@ -68,7 +68,7 @@ export async function getAllCharacters() {
       SELECT ch.*, id.identity
       FROM identities id 
       RIGHT JOIN characters ch
-      ON id.character = ch.id
+      ON id.character = ch.name
       ORDER BY ch.name
     `)
     return result
@@ -88,14 +88,14 @@ export async function getCharacterByName(name: string) {
   }
 }
 
-export async function getChaptersByCharacter(id: string) {
+export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
       SELECT chp.*
       FROM chapters chp
-      WHERE chp.character = $1
+      where chp.chapter = $1 OR chp.pov = $1
       ORDER BY chp.page
-    `,[id]
+    `,[name]
     )
     return result
   } catch (error) {
@@ -287,7 +287,7 @@ export async function createCharacters () {
         'INSERT INTO characters (id, name) VALUES ($1, $2)', [randomUUID(), character]
       )
     } catch (error) {
-      // console.log(error.detail)
+      console.log(error)
     }
   })
 }
@@ -297,10 +297,10 @@ export async function createIdentities () {
   characters.rows.map(async (character: Character) => {
     try {
       await pool.query(
-        'INSERT INTO identities (id, name, characterId) VALUES ($1, $2, $3)', [randomUUID(), character.name, character.id]
+        'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), character.name, character.name]
       )
     } catch (error) {
-      // console.log(error.detail)
+      console.log(error)
     }
   })
 }

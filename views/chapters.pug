@@ -7,16 +7,12 @@ html
       div(style='text-align: center;')
         h5=title
       table(class='table mt-3')
-        each chapter in chapters
+        each ch in chapters
           tr(style='text-align: left;')
             td(style='width: 70%')
-              if chapter.suffix
-                a(href='/character/' + chapter.name)=chapter.name
+              if ch.suffix
+                a(href='/character/' + ch.chapter)=ch.chapter
               else
-                span=chapter.name
-            td
-              if chapter.url
-                a(href=chapter.url)=chapter.suffix
-              else
-                span=chapter.suffix
-            td(style='text-align: right;')=chapter.page
+                span=ch.chapter
+            td=ch.suffix
+            td(style='text-align: right;')=ch.page
