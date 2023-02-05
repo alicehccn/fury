@@ -20,7 +20,7 @@ export async function getAllCharacters() {
   const result = await db.getAllCharacters()
   const characters = {}
   result.rows.forEach((ch: Character) => {
-    const character = `${ch.name} ${ch.house ? ch.house : ''}`
+    const character = `${ch.name}`
     if (characters[character] && ch.identity) {
       characters[character].push(ch.identity)
     } else {
