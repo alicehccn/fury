@@ -67,7 +67,7 @@ export async function getChaptersByCharacter(name: string) {
     const result = await pool.query(`
       SELECT chp.*
       FROM chapters chp
-      where chp.chapter = $1 OR chp.pov = $1
+      where chp.pov = $1
       ORDER BY chp.page
     `,[name]
     )
@@ -80,11 +80,11 @@ export async function getChaptersByCharacter(name: string) {
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`
-      SELECT ch.*, id.identity
-      FROM identities id 
+      SELECT ch.*, id.role
+      FROM roles id 
       RIGHT JOIN characters ch
       ON id.character = ch.name
-      ORDER BY ch.name, id.identity
+      ORDER BY ch.name, id.role
     `)
     return result
   } catch (error) {
@@ -177,10 +177,10 @@ export async function deleteCharacter(name: string) {
 }
 
 
-export async function addIdentity (name: string, identity: string) {
+export async function addRole (name: string, role: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), identity, name]
+      'INSERT INTO roles (id, role, character) VALUES ($1, $2, $3)', [randomUUID(), role, name]
     )
     return result
   } catch (error) {
@@ -222,7 +222,7 @@ export async function createTables () {
     )
     await pool.query(
       `CREATE TABLE IF NOT EXISTS
-        identities (
+        roles (
           id VARCHAR(50) PRIMARY KEY,
           name VARCHAR(50),
           characterId VARCHAR(50),
@@ -292,12 +292,12 @@ export async function createCharacters () {
   })
 }
 
-export async function createIdentities () {
+export async function createRoles () {
   const characters = await getAllCharacters()
   characters.rows.map(async (character: Character) => {
     try {
       await pool.query(
-        'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), character.name, character.name]
+        'INSERT INTO roles (id, role, character) VALUES ($1, $2, $3)', [randomUUID(), character.name, character.name]
       )
     } catch (error) {
       console.log(error)

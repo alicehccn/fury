@@ -39,9 +39,9 @@ app.post('/character/new', (req, res) => {
   controller.addCharacter(name as string, house as string, res)
 })
 
-app.post('/identity/new', (req, res) => {
-  const { character, identity } = req.query
-  controller.addIdentity(character as string, identity as string, res)
+app.post('/role/new', (req, res) => {
+  const { character, role } = req.query
+  controller.addRole(character as string, role as string, res)
 })
 
 app.listen(port, async() => {

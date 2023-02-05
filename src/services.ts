@@ -21,10 +21,10 @@ export async function getAllCharacters() {
   const characters = {}
   result.rows.forEach((ch: Character) => {
     const character = `${ch.name}`
-    if (characters[character] && ch.identity) {
-      characters[character].push(ch.identity)
+    if (characters[character] && ch.role) {
+      characters[character].push(ch.role)
     } else {
-      characters[character] = ch.identity ? [ch.identity] : ''
+      characters[character] = ch.role ? [ch.role] : ''
     }
   })
   const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: characters})
@@ -102,7 +102,7 @@ export async function deleteCharacter(name: string) {
   }
 }
 
-export async function addIdentity (name: string, identity: string) {
+export async function addRole (name: string, role: string) {
   try {
     const character = await db.getCharacterByName(name)
     const characterId = character?.rows[0]?.id
@@ -110,7 +110,7 @@ export async function addIdentity (name: string, identity: string) {
       console.log('Character not found')
       return ('Character not found')
     }
-    const result = await db.addIdentity(name, identity)
+    const result = await db.addRole(name, role)
     return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error

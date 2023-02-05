@@ -11,8 +11,8 @@ html
           tr(style='text-align: left;')
             td(style='width: 70%')
               if ch.suffix
-                a(href='/character/' + ch.chapter)=ch.chapter
+                a(href='/character/' + ch.pov)=ch.pov
               else
-                span=ch.chapter
+                span=ch.pov
             td=ch.suffix
             td(style='text-align: right;')=ch.page

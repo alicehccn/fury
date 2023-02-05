@@ -91,9 +91,9 @@ export async function deleteCharacter(slug: string, res: Response) {
   }
 }
 
-export async function addIdentity (character: string, identity: string, res: Response) {
+export async function addRole (character: string, role: string, res: Response) {
   try {
-    const result = await service.addIdentity(character, identity)
+    const result = await service.addRole(character, role)
     res.send(result)
   } catch (error) {
     return error
