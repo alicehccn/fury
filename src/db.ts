@@ -69,7 +69,7 @@ export async function getAllCharacters() {
       FROM identities id 
       RIGHT JOIN characters ch
       ON id.character = ch.name
-      ORDER BY ch.name
+      ORDER BY id.identity
     `)
     return result
   } catch (error) {
