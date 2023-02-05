@@ -28,7 +28,7 @@ export async function getTitleBySlug(slug: string) {
 export async function getAllTitles () {
   try {
     const result = await pool.query(
-      'SELECT * FROM titles'
+      'SELECT * FROM titles ORDER BY volume'
     )
     return result
   } catch (error) {
