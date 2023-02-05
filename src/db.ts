@@ -62,6 +62,21 @@ export async function getChaptersByTitle (title: string) {
   }
 }
 
+export async function getChaptersByCharacter(name: string) {
+  try {
+    const result = await pool.query(`
+      SELECT chp.*
+      FROM chapters chp
+      where chp.chapter = $1 OR chp.pov = $1
+      ORDER BY chp.page
+    `,[name]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`
@@ -69,7 +84,7 @@ export async function getAllCharacters() {
       FROM identities id 
       RIGHT JOIN characters ch
       ON id.character = ch.name
-      ORDER BY id.identity
+      ORDER BY ch.name, id.identity
     `)
     return result
   } catch (error) {
@@ -81,21 +96,6 @@ export async function getCharacterByName(name: string) {
   try {
     const result = await pool.query(
       'SELECT * FROM characters WHERE name = $1', [name]
-    )
-    return result
-  } catch (error) {
-    return error
-  }
-}
-
-export async function getChaptersByCharacter(name: string) {
-  try {
-    const result = await pool.query(`
-      SELECT chp.*
-      FROM chapters chp
-      where chp.chapter = $1 OR chp.pov = $1
-      ORDER BY chp.page
-    `,[name]
     )
     return result
   } catch (error) {
