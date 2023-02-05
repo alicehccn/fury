@@ -35,8 +35,8 @@ app.post('/title/new', (req, res) => {
 })
 
 app.post('/character/new', (req, res) => {
-  const { name } = req.query
-  controller.addCharacter(name as string, res)
+  const { name, house } = req.query
+  controller.addCharacter(name as string, house as string, res)
 })
 
 app.post('/identity/new', (req, res) => {

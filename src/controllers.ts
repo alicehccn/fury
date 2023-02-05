@@ -73,9 +73,9 @@ export async function deleteTitle(slug: string, res: Response) {
   }
 }
 
-export async function addCharacter(name: string, res: Response) {
+export async function addCharacter(name: string, house: string, res: Response) {
   try {
-    const result = await service.addCharacter(name)
+    const result = await service.addCharacter(name, house)
     res.send(result)
   } catch (error) {
     return error

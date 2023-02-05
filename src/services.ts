@@ -83,9 +83,9 @@ export async function deleteTitle(slug: string) {
   }
 }
 
-export async function addCharacter(name: string) {
+export async function addCharacter(name: string, house: string) {
   try {
-    const result = await db.addCharacter(name)
+    const result = await db.addCharacter(name, house)
     return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error
@@ -109,7 +109,7 @@ export async function addIdentity (name: string, identity: string) {
       console.log('Character not found')
       return ('Character not found')
     }
-    const result = await db.addIdentity(characterId, identity)
+    const result = await db.addIdentity(name, identity)
     return `Added ${result.rowCount} row(s)`
   } catch (error) {
     return error

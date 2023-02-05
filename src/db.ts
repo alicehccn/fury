@@ -154,10 +154,10 @@ export async function deleteTitle(slug: string) {
   }
 }
 
-export async function addCharacter(name: string) {
+export async function addCharacter(name: string, house: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO characters (id, name) values($1, $2)', [randomUUID(), name]
+      'INSERT INTO characters (id, name, house) values($1, $2, $3)', [randomUUID(), name, house]
     )
     return result
   } catch (error) {
@@ -177,10 +177,10 @@ export async function deleteCharacter(name: string) {
 }
 
 
-export async function addIdentity (characterId: string, identity: string) {
+export async function addIdentity (name: string, identity: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), identity, characterId]
+      'INSERT INTO identities (id, identity, character) VALUES ($1, $2, $3)', [randomUUID(), identity, name]
     )
     return result
   } catch (error) {
