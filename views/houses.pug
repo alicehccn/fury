@@ -1,0 +1,12 @@
+html
+  head
+    include head
+  body
+    div(class='mt-5')
+      h1(class='page-header mb-5' style='text-align: center;') Houses of Westros
+      table(class='table' style='text-align:left;')
+        each house in houses
+          tr
+            td=house.name
+            td=house.sigil
+            td(style='text-align:right;')=house.words
