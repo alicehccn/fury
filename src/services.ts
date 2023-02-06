@@ -116,3 +116,18 @@ export async function addRole (name: string, role: string) {
     return error
   }
 }
+
+export async function addHouse (house: string, sigil: string, words: string) {
+  try {
+    const result = await db.addHouse(house, sigil, words)
+    return `Added ${result.rowCount} row(s)`
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getAllHouses () {
+  const result = await db.getAllHouses()
+  const html = pug.renderFile(path.join(__dirname, '../views/houses.pug'), {houses: result.rows})
+  return html
+}

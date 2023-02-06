@@ -188,6 +188,16 @@ export async function addRole (name: string, role: string) {
   }
 }
 
+export async function addHouse (house: string, sigil: string, words: string) {
+  try {
+    const result = await pool.query(
+      'INSERT INTO houses (id, name, sigil, words) VALUES ($1, $2, $3, $4)', [randomUUID(), house, sigil, words]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
 // Utils //
 
 export async function createTables () {
@@ -205,7 +215,7 @@ export async function createTables () {
       `CREATE TABLE IF NOT EXISTS
         chapters (
           id VARCHAR(50) PRIMARY KEY,
-          name VARCHAR(50),
+          pov VARCHAR(50),
           suffix VARCHAR(50),
           page INT,
           title VARCHAR(50),
@@ -217,6 +227,7 @@ export async function createTables () {
         characters (
           id VARCHAR(50) PRIMARY KEY,
           name VARCHAR(50),
+          house VARCHAR(50),
         UNIQUE(name)
       )`
     )
@@ -224,13 +235,23 @@ export async function createTables () {
       `CREATE TABLE IF NOT EXISTS
         roles (
           id VARCHAR(50) PRIMARY KEY,
+          role VARCHAR(50),
+          character VARCHAR(50),
+        UNIQUE(role, character)
+      )`
+    )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        houses (
+          id VARCHAR(50) PRIMARY KEY,
           name VARCHAR(50),
-          characterId VARCHAR(50),
-        UNIQUE(name, characterId)
+          sigil VARCHAR(50),
+          words VARCHAR(150),
+        UNIQUE(name)
       )`
     )
   } catch (error) {
-    // console.log(error.detail)
+    console.log(error)
   }
 }
 
@@ -303,4 +324,15 @@ export async function createRoles () {
       console.log(error)
     }
   })
+}
+
+export async function getAllHouses() {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM houses ORDER BY name'
+    )
+    return result
+  } catch(error) {
+    return error
+  }
 }

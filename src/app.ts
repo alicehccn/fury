@@ -1,3 +1,4 @@
+import { createTables } from './db'
 import express from 'express'
 import * as controller from './controllers'
 
@@ -23,6 +24,9 @@ app.get('/character/:name', (req, res) => {
   controller.getChaptersByCharacter(character, res)
 })
 
+app.get('/houses', (req, res) => {
+  controller.getAllHouses(res)
+})
 
 app.post('/chapter/new', (req, res) => {
   const {name, page, title} = req.query
@@ -44,6 +48,12 @@ app.post('/role/new', (req, res) => {
   controller.addRole(character as string, role as string, res)
 })
 
+app.post('/house/new', (req, res) => {
+  const { house, sigil, words } = req.query
+  controller.addHouse(house as string, sigil as string, words as string, res)
+})
+
 app.listen(port, async() => {
+  createTables()
   console.log(`app listening at localhost:${port}`)
 })

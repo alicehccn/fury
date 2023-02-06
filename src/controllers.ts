@@ -99,3 +99,21 @@ export async function addRole (character: string, role: string, res: Response) {
     return error
   }
 }
+
+export async function addHouse (house: string, sigil: string, words: string, res: Response) {
+  try {
+    const result = await service.addHouse(house, sigil, words)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getAllHouses (res: Response) {
+  try {
+    const houses = await service.getAllHouses()
+    res.send(houses)
+  } catch(error) {
+    res.send(error)
+  }
+}
