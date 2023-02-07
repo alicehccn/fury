@@ -19,6 +19,11 @@ app.get('/characters', (req, res) => {
   controller.getAllCharacters(res)
 })
 
+app.get('/:house/characters', (req, res) => {
+  const house = req?.params.house
+  controller.getCharactersByHouse(house, res)
+})
+
 app.get('/character/:name', (req, res) => {
   const character = req?.params.name
   controller.getChaptersByCharacter(character, res)

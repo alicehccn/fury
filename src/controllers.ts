@@ -28,6 +28,15 @@ export async function getAllCharacters (res: Response) {
   }
 }
 
+export async function getCharactersByHouse (house: string, res: Response) {
+  try {
+    const characters = await service.getCharactersByHouse(house)
+    res.send(characters)
+  } catch(error) {
+    res.send(error)
+  }
+}
+
 export async function getChaptersByCharacter(name: string, res: Response) {
   try {
     const chapters = await service.getChaptersByCharacter(name)

@@ -27,7 +27,13 @@ export async function getAllCharacters() {
       characters[character] = ch.role ? [ch.role] : ''
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters: characters})
+  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters})
+  return html
+}
+
+export async function getCharactersByHouse(house: string) {
+  const result = await db.getCharactersByHouse(house)
+  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters: result.rows, house})
   return html
 }
 
@@ -127,7 +133,7 @@ export async function addHouse (house: string, sigil: string, words: string) {
 }
 
 export async function getAllHouses () {
-  const result = await db.getAllHouses()
-  const html = pug.renderFile(path.join(__dirname, '../views/houses.pug'), {houses: result.rows})
+  const houses = await db.getAllHouses()
+  const html = pug.renderFile(path.join(__dirname, '../views/houses.pug'), {houses: houses.rows})
   return html
 }

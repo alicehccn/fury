@@ -14,6 +14,17 @@ export function createPool() {
 }
 const pool = createPool()
 
+export async function getCharactersByHouse(house: string) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM characters WHERE house = $1', [house]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getTitleBySlug(slug: string) {
   try {
     const result = await pool.query(
@@ -80,9 +91,9 @@ export async function getChaptersByCharacter(name: string) {
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`
-      SELECT ch.*, id.role
+      SELECT ch.name, id.role
       FROM roles id 
-      RIGHT JOIN characters ch
+      LEFT JOIN characters ch
       ON id.character = ch.name
       ORDER BY ch.name, id.role
     `)
@@ -328,9 +339,25 @@ export async function createRoles () {
 
 export async function getAllHouses() {
   try {
-    const result = await pool.query(
-      'SELECT * FROM houses ORDER BY name'
-    )
+    const result = await pool.query(`
+      SELECT * from houses;
+    `)
+    return result
+  } catch(error) {
+    return error
+  }
+}
+
+export async function getAllStuff() {
+  try {
+    const result = await pool.query(`
+      SELECT h.lastname, h.sigil, h.words, ch.name as character, r.role
+      FROM houses h
+      LEFT OUTER JOIN characters ch
+      ON h.lastname = ch.house
+      LEFT OUTER JOIN roles r
+      ON r.character = ch.name
+    `)
     return result
   } catch(error) {
     return error

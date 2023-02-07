@@ -1,0 +1,13 @@
+html
+  include head
+  body
+    div(class='mt-5')
+      div(class='pl-3')
+        a(href='/houses') <<
+      div(style='text-align: center;')
+        h5=house
+        table(class='table mt-3')
+          each ch in characters
+            tr(style='text-align: left;')
+              td
+                a(href='/character/' + ch.name)=ch.name
