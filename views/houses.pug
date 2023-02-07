@@ -5,4 +5,5 @@ html
     div(class='mt-5')
       h1(class='page-header mb-5' style='text-align: center;') Houses of Westros
       each h in houses 
-        h5(style='text-align: center')=h.lastname
+        h5(style='text-align: center')
+          a(href='/'+h.lastname+'/characters')=h.lastname

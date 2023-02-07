@@ -16,8 +16,20 @@ const pool = createPool()
 
 export async function getCharactersByHouse(house: string) {
   try {
-    const result = await pool.query(
-      'SELECT * FROM characters WHERE house = $1', [house]
+    const result = await pool.query(`
+    SELECT DISTINCT chr.name, t.title, t.slug, t.volume
+    FROM chapters chp
+    INNER JOIN roles r
+    ON chp.pov = r.role
+    INNER JOIN characters chr
+    ON chr.name = r.character
+    INNER JOIN houses h
+    ON h.lastname = chr.house
+    INNER JOIN titles t
+    ON t.slug = chp.title
+    WHERE h.lastname = $1
+    ORDER BY chr.name, t.volume
+    `,[house]
     )
     return result
   } catch (error) {

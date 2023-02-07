@@ -33,7 +33,15 @@ export async function getAllCharacters() {
 
 export async function getCharactersByHouse(house: string) {
   const result = await db.getCharactersByHouse(house)
-  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters: result.rows, house})
+  const characters = {}
+  result.rows.forEach((row) => {
+    if (characters[row.name]) {
+      characters[row.name].push(row)
+    } else {
+      characters[row.name] = [row]
+    }
+  })
+  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters, house})
   return html
 }
 
