@@ -88,9 +88,11 @@ export async function getChaptersByTitle (title: string) {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.*
+      SELECT chp.pov, chp.suffix, chp.page, chp.title
       FROM chapters chp
-      where chp.pov = $1
+      INNER JOIN roles r
+      ON chp.pov = r.role
+      WHERE r.character = $1
       ORDER BY chp.page
     `,[name]
     )
