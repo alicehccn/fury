@@ -73,11 +73,13 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(`
-      SELECT *
-      FROM chapters chapter
-      WHERE chapter.title = $1
-      ORDER BY chapter.page`,
-    [title]
+      SELECT chp.pov, chp.suffix, chp.page, chp.title, r.character
+      FROM chapters chp
+      INNER JOIN roles r
+      ON r.role = chp.pov
+      WHERE chp.title = $1
+      ORDER BY chp.page
+      `, [title]
     )
     return result
   } catch (error) {
@@ -88,12 +90,14 @@ export async function getChaptersByTitle (title: string) {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.page, chp.title
+      SELECT r.character, chp.pov, chp.suffix, chp.page, chp.title as slug, t.title, t.volume
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role
+      INNER JOIN titles t
+      ON t.slug = chp.title
       WHERE r.character = $1
-      ORDER BY chp.page
+      ORDER BY t.volume, chp.page
     `,[name]
     )
     return result

@@ -19,15 +19,6 @@ export async function getChaptersByTitle (title: string, res: Response) {
   }
 }
 
-export async function getAllCharacters (res: Response) {
-  try {
-    const characters = await service.getAllCharacters()
-    res.send(characters)
-  } catch(error) {
-    res.send(error)
-  }
-}
-
 export async function getCharactersByHouse (house: string, res: Response) {
   try {
     const characters = await service.getCharactersByHouse(house)

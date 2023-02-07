@@ -12,22 +12,7 @@ export async function getAllTitles () {
 export async function getChaptersByTitle (slug: string) {
   const result = await db.getChaptersByTitle(slug)
   const title = await db.getTitleBySlug(slug)
-  const html = pug.renderFile(path.join(__dirname, '../views/chapters.pug'), {title: title.rows[0].title, chapters: result.rows})
-  return html
-}
-
-export async function getAllCharacters() {
-  const result = await db.getAllCharacters()
-  const characters = {}
-  result.rows.forEach((ch: Character) => {
-    const character = `${ch.name}`
-    if (characters[character] && ch.role) {
-      characters[character].push(ch.role)
-    } else {
-      characters[character] = ch.role ? [ch.role] : ''
-    }
-  })
-  const html = pug.renderFile(path.join(__dirname, '../views/characters.pug'), {characters})
+  const html = pug.renderFile(path.join(__dirname, '../views/title.pug'), {title: title.rows[0].title, chapters: result.rows})
   return html
 }
 

@@ -4,10 +4,10 @@ html
     div(class='mt-5' style='text-align: center;')
       for val, key in chapters
         h5
-          a(href='/title/'+key)=key.toUpperCase()
-        table(class='table mt-3')
+          a(href='/title/'+val[0].slug)=key
+        table(class='table mb-5 mt-3')
           each ch in val
             tr(style='text-align: left;')
-              td(style='width: 70%')=ch.pov
-              td=ch.suffix
+              td(style='width: 40%')=ch.character
+              td=ch.pov + (ch.suffix ? ' '+ch.suffix : '')
               td(style='text-align: right;')=ch.page
