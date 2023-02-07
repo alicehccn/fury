@@ -9,5 +9,7 @@ html
           each ch in val
             tr(style='text-align: left;')
               td(style='width: 40%')=ch.character
-              td=ch.pov + (ch.suffix ? ' '+ch.suffix : '')
+              td
+                span=ch.pov
+                span=ch.suffix ? ' '+ch.suffix : ''
               td(style='text-align: right;')=ch.page
