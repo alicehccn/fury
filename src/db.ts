@@ -358,7 +358,10 @@ export async function createRoles () {
 export async function getAllHouses() {
   try {
     const result = await pool.query(`
-      SELECT * from houses;
+      SELECT DISTINCT h.lastname
+      FROM houses h
+      INNER JOIN characters chr
+      ON chr.house = h.lastname
     `)
     return result
   } catch(error) {
