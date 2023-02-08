@@ -5,13 +5,14 @@ html
       div(class='pl-3 mb-5')
         a(href='/houses') <<
       div(style='text-align: center;')
-        h3(class='mb-5')=house.toUpperCase()
+        h2=house.toUpperCase()
+        p(class='mb-5')=words
         for chr, k in characters
           table(class='table mt-3' style='text-align: left;')
             tr
-              td(style='width: 46%')
-                a(href='/character/' + k)=k
               td
-                each chapter in chr 
+                a(href='/character/' + k)=k
+              td(style='text-align: right')
+                each t in chr 
                   p
-                    a(href='/title/' + chapter.slug)=chapter.title
+                    a(href='/title/' + t.slug)=t.title

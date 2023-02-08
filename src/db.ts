@@ -17,7 +17,7 @@ const pool = createPool()
 export async function getCharactersByHouse(house: string) {
   try {
     const result = await pool.query(`
-    SELECT DISTINCT chr.name, t.title, t.slug, t.volume
+    SELECT DISTINCT chr.name, t.title, t.slug, t.volume, h.words
     FROM chapters chp
     INNER JOIN roles r
     ON chp.pov = r.role
@@ -220,7 +220,7 @@ export async function addRole (name: string, role: string) {
 export async function addHouse (house: string, sigil: string, words: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO houses (id, name, sigil, words) VALUES ($1, $2, $3, $4)', [randomUUID(), house, sigil, words]
+      'INSERT INTO houses (id, lastname, sigil, words) VALUES ($1, $2, $3, $4)', [randomUUID(), house, sigil, words]
     )
     return result
   } catch (error) {

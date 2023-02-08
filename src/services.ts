@@ -18,6 +18,7 @@ export async function getChaptersByTitle (slug: string) {
 
 export async function getCharactersByHouse(house: string) {
   const result = await db.getCharactersByHouse(house)
+  const words = result.rows[0]?.words
   const characters = {}
   result.rows.forEach((row) => {
     if (characters[row.name]) {
@@ -26,21 +27,24 @@ export async function getCharactersByHouse(house: string) {
       characters[row.name] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters, house})
+  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters, house, words})
   return html
 }
 
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
-  const chaptersPerTitle = {}
+  const character = await db.getCharacterByName(name)
+  const house = character.rows[0]?.house
+  const total = result.rowCount
+  const chapters = {}
   result.rows.forEach((row: Title) => {
-    if (chaptersPerTitle[row.title]) {
-      chaptersPerTitle[row.title].push(row)
+    if (chapters[row.title]) {
+      chapters[row.title].push(row)
     } else {
-      chaptersPerTitle[row.title] = [row]
+      chapters[row.title] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters: chaptersPerTitle, total: result.rowCount})
+  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters, total, house})
   return html
 }
 
