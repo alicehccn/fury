@@ -8,7 +8,6 @@ html
         table(class='table mb-5 mt-3')
           each ch in val
             tr(style='text-align: left;')
-              td(style='width: 40%')=ch.character
               td
                 span=ch.pov
                 span=ch.suffix ? ' '+ch.suffix : ''
