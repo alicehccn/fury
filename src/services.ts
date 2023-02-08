@@ -40,7 +40,7 @@ export async function getChaptersByCharacter(name: string) {
       chaptersPerTitle[row.title] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters: chaptersPerTitle})
+  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters: chaptersPerTitle, total: result.rowCount})
   return html
 }
 

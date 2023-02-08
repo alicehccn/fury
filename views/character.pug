@@ -1,13 +1,23 @@
 html
   include head
   body
-    div(class='mt-5' style='text-align: center;')
-      for val, key in chapters
-        h5
-          a(href='/title/'+val[0].slug)=key
-        table(class='table mb-5 mt-3')
-          each ch in val
-            tr(style='text-align: left;')
-              td(style='width: 50%')=ch.pov
-              td=ch.suffix
-              td(style='text-align: right;')=ch.page
+    div(class='mt-5 pl-1')
+      div(class='pl-1')
+        h1(class='pl-1' )=header
+        table(class='table')
+          tr
+            td(style='width: 200px') House:
+            td Stark 
+          tr 
+            td Total Chapters
+            td=total
+      div(class='mt-5' style='text-align: center;')
+        for val, key in chapters
+          h5(style='text-align: center')
+            a(href='/title/'+val[0].slug)=key
+          table(class='table mb-5 mt-3')
+            each ch in val
+              tr(style='text-align: left;')
+                td(style='width: 50%')=ch.pov
+                td=ch.suffix
+                td(style='text-align: right;')=ch.page
