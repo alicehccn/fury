@@ -164,7 +164,7 @@ export async function addTitle(name: string) {
 export async function addChapter(name: string, suffix: string, page: number | string, title: string) {
   try {
     const result = await pool.query(
-      'INSERT INTO chapters (id, name, suffix, page, title) values($1, $2, $3, $4, $5)', [randomUUID(), name, suffix, page, title]
+      'INSERT INTO chapters (id, pov, suffix, page, title) values($1, $2, $3, $4, $5)', [randomUUID(), name, suffix, page, title]
     )
     return result
   } catch (error) {
