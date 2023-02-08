@@ -284,6 +284,22 @@ export async function createTables () {
   }
 }
 
+
+export async function getAllHouses() {
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT h.lastname, h.sigil, h.words
+      FROM houses h
+      INNER JOIN characters chr
+      ON chr.house = h.lastname
+    `)
+    return result
+  } catch(error) {
+    return error
+  }
+}
+
+
 //////////////
 // OUTDATED //
 //////////////
@@ -353,34 +369,4 @@ export async function createRoles () {
       console.log(error)
     }
   })
-}
-
-export async function getAllHouses() {
-  try {
-    const result = await pool.query(`
-      SELECT DISTINCT h.lastname
-      FROM houses h
-      INNER JOIN characters chr
-      ON chr.house = h.lastname
-    `)
-    return result
-  } catch(error) {
-    return error
-  }
-}
-
-export async function getAllStuff() {
-  try {
-    const result = await pool.query(`
-      SELECT h.lastname, h.sigil, h.words, ch.name as character, r.role
-      FROM houses h
-      LEFT OUTER JOIN characters ch
-      ON h.lastname = ch.house
-      LEFT OUTER JOIN roles r
-      ON r.character = ch.name
-    `)
-    return result
-  } catch(error) {
-    return error
-  }
 }
