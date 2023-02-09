@@ -11,7 +11,7 @@ html
           table(class='table mt-3')
             tr(style='text-align: left;')
               td(style='width: 45%')
-                a(href='/title/')=k
+                a(href='/title/'+title[0].slug)=k
               td
                 each ch in title
                   p
