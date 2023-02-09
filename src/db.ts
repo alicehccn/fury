@@ -87,6 +87,24 @@ export async function getChaptersByTitle (title: string) {
   }
 }
 
+export async function getTitleSummary() {
+  try {
+    const result = await pool.query(`
+      SELECT t.title, t.slug, r.character, COUNT(chp) count, t.volume
+      FROM roles r
+      LEFT OUTER JOIN chapters chp
+      ON chp.pov = r.role
+      RIGHT OUTER JOIN titles t
+      ON t.slug = chp.title
+      GROUP by t.volume, t.title, t.slug, r.character
+      ORDER BY t.volume, t.title, count desc
+    `)
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`

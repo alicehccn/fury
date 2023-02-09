@@ -4,8 +4,16 @@ import { romanizedInt } from './utils'
 import * as db from './db'
 
 export async function getAllTitles () {
-  const result = await db.getAllTitles()
-  const html = pug.renderFile(path.join(__dirname, '../views/titles.pug'), {titles: result.rows})
+  const result = await db.getTitleSummary()
+  const titles = {}
+  result.rows.forEach((row) => {
+    if (titles[row.title]) {
+      titles[row.title].push(row)
+    } else {
+      titles[row.title] = [row]
+    }
+  })
+  const html = pug.renderFile(path.join(__dirname, '../views/titles.pug'), {titles})
   return html
 }
 

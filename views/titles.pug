@@ -4,9 +4,17 @@ html
   body
     div(style='text-align: center; width: 100%;' class='mt-5')
       h1(class='page-header mb-5') Index of Ice and Fire
-      table(class='table' style='text-align:left;')
-        each title in titles
-          tr
-            td
-              a(href='/title/'+title.slug)=title.title
-            td(style='text-align:right;')=title.slug.toUpperCase()
+      div(class='mt-5' style='text-align: center;')
+        for title, k in titles
+          h5(style='text-align: center')
+            a(href='/title/'+k)=key
+          table(class='table mt-3')
+            tr(style='text-align: left;')
+              td(style='width: 45%')
+                a(href='/title/')=k
+              td
+                each ch in title
+                  p
+                    a(href='/character/'+ch.character)=ch.character
+                    sup=ch.count
+              td(style='text-align: right')=title[0].slug.toUpperCase()
