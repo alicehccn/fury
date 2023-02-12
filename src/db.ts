@@ -150,6 +150,28 @@ export async function getCharacterByName(name: string) {
   }
 }
 
+export async function getCharacterSummaries() {
+  try {
+    const result = await pool.query(`
+      SELECT
+        r.character,
+        chr.house,
+        count(chp.id) AS count,
+        RANK() OVER(ORDER BY count(chp.id) DESC) rank
+      FROM chapters chp
+      INNER JOIN roles r
+      ON r.role = chp.pov
+      LEFT OUTER JOIN characters chr
+      ON chr.name = r.character
+      GROUP BY r.character, chr.house
+      ORDER BY count DESC
+    `)
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getAppearances(name: string, title: string) {
   try {
     const result = await pool.query(

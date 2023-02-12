@@ -41,9 +41,11 @@ export async function getCharactersByHouse(house: string) {
 
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
-  const character = await db.getCharacterByName(name)
-  const house = character.rows[0]?.house
+  const temp = await db.getCharacterSummaries()
+  const character = temp.rows.filter(row => row.character === name)[0]
+  const house = character?.house
   const total = result.rowCount
+  const rank = character.rank
   const chapters = {}
   result.rows.forEach((row: Title) => {
     if (chapters[row.title]) {
@@ -52,7 +54,7 @@ export async function getChaptersByCharacter(name: string) {
       chapters[row.title] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters, total, house})
+  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters, total, house, rank})
   return html
 }
 
