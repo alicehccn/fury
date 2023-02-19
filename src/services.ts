@@ -58,15 +58,6 @@ export async function getChaptersByCharacter(name: string) {
   return html
 }
 
-export async function deleteChapter(page: string | number, title: string) {
-  try {
-    const result = await db.deleteChapter(page, title)
-    return `Delete ${result.rowCount} row(s)`
-  } catch (error) {
-    return error
-  }
-}
-
 export async function addChapter(name: string, page: number | string, title: string) {
   try {
     const temp = await db.getAppearances(name, title)
@@ -88,28 +79,10 @@ export async function addTitle(name: string) {
   }
 }
 
-export async function deleteTitle(slug: string) {
-  try {
-    const result = await db.deleteTitle(slug)
-    return `Delete ${result.rowCount} row(s)`
-  } catch (error) {
-    return error
-  }
-}
-
 export async function addCharacter(name: string, house: string) {
   try {
     const result = await db.addCharacter(name, house)
     return `Added ${result.rowCount} row(s)`
-  } catch (error) {
-    return error
-  }
-}
-
-export async function deleteCharacter(name: string) {
-  try {
-    const result = await db.deleteCharacter(name)
-    return `Delete ${result.rowCount} row(s)`
   } catch (error) {
     return error
   }

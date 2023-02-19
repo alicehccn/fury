@@ -37,15 +37,6 @@ export async function getChaptersByCharacter(name: string, res: Response) {
   }
 }
 
-export async function deleteChapter(page: string | number, title: string, res: Response) {
-  try {
-    const result = await service.deleteChapter(page, title)
-    res.send(result)
-  } catch (error) {
-    res.send(error)
-  }
-}
-
 export async function addChapter(name: string, page: string | number, title: string, res: Response) {
   try {
     const result = await service.addChapter(name, page, title)
@@ -64,30 +55,12 @@ export async function addTitle(name: string, res: Response) {
   }
 }
 
-export async function deleteTitle(slug: string, res: Response) {
-  try {
-    const result = await service.deleteTitle(slug)
-    res.send(result)
-  } catch (error) {
-    res.send(error)
-  }
-}
-
 export async function addCharacter(name: string, house: string, res: Response) {
   try {
     const result = await service.addCharacter(name, house)
     res.send(result)
   } catch (error) {
     return error
-  }
-}
-
-export async function deleteCharacter(slug: string, res: Response) {
-  try {
-    const result = await service.deleteCharacter(slug)
-    res.send(result)
-  } catch (error) {
-    res.send(error)
   }
 }
 

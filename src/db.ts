@@ -73,10 +73,12 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.page, chp.title, r.character
+      SELECT chp.pov, chp.suffix, chp.page, chp.title, r.character, m.url
       FROM chapters chp
       INNER JOIN roles r
       ON r.role = chp.pov
+      LEFT JOIN media m
+      ON m.chapter = chp.id
       WHERE chp.title = $1
       ORDER BY chp.page
       `, [title]
@@ -267,6 +269,22 @@ export async function addHouse (house: string, sigil: string, words: string) {
     return error
   }
 }
+
+
+export async function getAllHouses() {
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT h.lastname, h.sigil, h.words
+      FROM houses h
+      INNER JOIN characters chr
+      ON chr.house = h.lastname
+    `)
+    return result
+  } catch(error) {
+    return error
+  }
+}
+
 // Utils //
 
 export async function createTables () {
@@ -319,23 +337,17 @@ export async function createTables () {
         UNIQUE(name)
       )`
     )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        media (
+          id VARCHAR(50) PRIMARY KEY,
+          url VARCHAR(50),
+          chapter VARCHAR(50),
+        UNIQUE(url)
+      )`
+    )
   } catch (error) {
     console.log(error)
-  }
-}
-
-
-export async function getAllHouses() {
-  try {
-    const result = await pool.query(`
-      SELECT DISTINCT h.lastname, h.sigil, h.words
-      FROM houses h
-      INNER JOIN characters chr
-      ON chr.house = h.lastname
-    `)
-    return result
-  } catch(error) {
-    return error
   }
 }
 
