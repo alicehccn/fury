@@ -18,18 +18,18 @@ const pool = createPool()
 export async function getCharactersByHouse(house: string) {
   try {
     const result = await pool.query(`
-    SELECT DISTINCT chr.name, t.title, t.slug, t.volume, h.words
-    FROM chapters chp
-    INNER JOIN roles r
-    ON chp.pov = r.role
-    INNER JOIN characters chr
-    ON chr.name = r.character
-    INNER JOIN houses h
-    ON h.lastname = chr.house
-    INNER JOIN titles t
-    ON t.slug = chp.title
-    WHERE h.lastname = $1
-    ORDER BY chr.name, t.volume
+      SELECT DISTINCT chr.name, t.title, t.slug, t.volume, h.words
+      FROM chapters chp
+      INNER JOIN roles r
+      ON chp.pov = r.role
+      INNER JOIN characters chr
+      ON chr.name = r.character
+      INNER JOIN houses h
+      ON h.lastname = chr.house
+      INNER JOIN titles t
+      ON t.slug = chp.title
+      WHERE h.lastname = $1
+      ORDER BY chr.name, t.volume
     `,[house]
     )
     return result
@@ -76,7 +76,7 @@ export async function getChaptersByTitle (title: string) {
     const result = await pool.query(`
       SELECT chp.pov, chp.suffix, chp.page, chp.title, r.character, m.url
       FROM chapters chp
-      INNER JOIN roles r
+      LEFT JOIN roles r
       ON r.role = chp.pov
       LEFT JOIN media m
       ON m.chapter = chp.id
@@ -344,7 +344,7 @@ export async function createTables () {
           id VARCHAR(50) PRIMARY KEY,
           url VARCHAR(50),
           chapter VARCHAR(50),
-        UNIQUE(url)
+        UNIQUE(url, chapter)
       )`
     )
   } catch (error) {
