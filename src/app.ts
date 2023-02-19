@@ -1,10 +1,8 @@
-import { createTables } from './db'
 import express from 'express'
 import * as controller from './controllers'
 
 
 const app = express()
-const port = 4000
 
 app.get('/', (req, res) => {
   controller.getAllTitles(res)
@@ -54,7 +52,6 @@ app.post('/house/new', (req, res) => {
   controller.addHouse(house as string, sigil as string, words as string, res)
 })
 
-app.listen(port, async() => {
-  createTables()
-  console.log(`app listening at localhost:${port}`)
+app.listen(process.env.PORT, async() => {
+  console.log(`app listening at port ${process.env.PORT}`)
 })

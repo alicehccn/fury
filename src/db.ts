@@ -2,18 +2,19 @@ import { Pool } from 'pg'
 import fs from 'fs/promises'
 import { randomUUID } from 'crypto'
 import { toKebabCase } from './utils'
+import { config } from 'dotenv'
+config()
 
 export function createPool() {
   return new Pool({
-    user: 'postgres',
-    database: 'postgres',
-    password: 'postgres',
-    port: 5432,
-    host: '146.190.60.119',
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASS,
+    port: +process.env.DB_PORT || 5432,
+    host: process.env.HOST || 'localhost',
   })
 }
 const pool = createPool()
-
 export async function getCharactersByHouse(house: string) {
   try {
     const result = await pool.query(`
