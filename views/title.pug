@@ -10,7 +10,10 @@ html
         each ch in chapters
           tr(style='text-align: left;')
             td(style='width: 50%')
-              a(href='/character/' + ch.character)=ch.pov
+              if ch.pov.indexOf('logue') > -1
+                span=ch.pov
+              else
+                a(href='/character/' + ch.character)=ch.pov
             td=ch.suffix
             td(style='text-align: right;')
               if ch.url
