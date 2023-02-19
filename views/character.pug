@@ -24,4 +24,8 @@ html
               tr(style='text-align: left;')
                 td(style='width: 50%')=ch.pov
                 td=ch.suffix
-                td(style='text-align: right;')=ch.page
+                td(style='text-align: right;')
+                  if ch.url
+                    a(href=ch.url target='_blank' )=ch.page
+                  else
+                    span=ch.page
