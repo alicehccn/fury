@@ -1,5 +1,4 @@
 name: CI
-on: [push]
 jobs:
   lhci:
     name: Lighthouse
@@ -13,8 +12,7 @@ jobs:
       - name: npm install, build
         run: |
           yarn install
-          yarn build
       - name: run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.8.x
+          yarn global install @lhci/cli@0.8.x
           lhci autorun
