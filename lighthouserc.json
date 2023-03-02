@@ -9,7 +9,7 @@
         "throttlingMethod": "devtools"
       },
       "url": [
-        "http://http://146.190.60.119/"
+        "http://146.190.60.119/"
       ],
       "startServerCommand": "yarn dev"
     },
