@@ -9,13 +9,14 @@ html
       table(class='table mt-3')
         each ch in chapters
           tr(style='text-align: left;')
-            td(style='width: 50%')
+            td
               if ch.pov.indexOf('logue') > -1
                 span=ch.pov
               else
                 a(href='/character/' + ch.character)=ch.pov
             td=ch.suffix
-            td(style='text-align: right;')
+            td(style='font-size: 12px;')=ch.headline
+            td(style='text-align: right; width: fit-content')
               if ch.url
                 a(href=ch.url target='_blank' )=ch.page
               else
