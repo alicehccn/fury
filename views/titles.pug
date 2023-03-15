@@ -12,10 +12,10 @@ html
           table(class='table mt-3')
             tr(style='text-align: left; color: #d8d4cf')
               td(style='width: 45%')
-                a(href='/title/'+title[0].slug)=k
-              td
                 each ch in title
                   p
                     a(href='/character/'+ch.character)=ch.character
                     sup=ch.count
+              td
+                a(href='/title/'+title[0].slug)=k
               td(style='text-align: right')=title[0].slug.toUpperCase()

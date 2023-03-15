@@ -8,8 +8,8 @@ html
         h5=title
       table(class='table mt-3' style='color: #d8d4cf')
         each ch in chapters
-          tr(style='text-align: left;')
-            td
+          tr(style='text-align: left')
+            td(style='width: 200px')
               if ch.pov.indexOf('logue') > -1
                 span=ch.pov
               else
