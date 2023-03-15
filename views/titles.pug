@@ -1,8 +1,8 @@
 html
   head
     include head
-  body
-    div(class='mt-5' style='max-width: 1080px; margin: auto')
+  body(style='background-color: rgb(17, 18, 19)')
+    div(class='mt-5' style='max-width: 1080px; margin: auto; color: #d8d4cf')
       div(style='text-align: center;')
         h1(class='page-header mb-5') Index of Ice and Fire
       div(class='mt-5' style='text-align: center;')
@@ -10,7 +10,7 @@ html
           h5(style='text-align: center')
             a(href='/title/'+k)=key
           table(class='table mt-3')
-            tr(style='text-align: left;')
+            tr(style='text-align: left; color: #d8d4cf')
               td(style='width: 45%')
                 a(href='/title/'+title[0].slug)=k
               td

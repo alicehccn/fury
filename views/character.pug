@@ -1,10 +1,10 @@
 html
   include head
-  body
-    div(class='mt-5 pl-1' style='max-width: 1080px; margin: auto')
+  body(style='background-color: rgb(17, 18, 19); color: #d8d4cf')
+    div(class='mt-5 pl-1' style='max-width: 1080px; margin: auto color: #d8d4cf')
       div(class='pl-1')
         h1(class='pl-2 mb-4' )=header
-        table(class='table')
+        table(class='table' style='color: #d8d4cf')
           tr
             td(style='width: 150px') House
             td
@@ -19,7 +19,7 @@ html
         for val, key in chapters
           h5(style='text-align: center')
             a(href='/title/'+val[0].slug)=key
-          table(class='table mb-5 mt-3')
+          table(class='table mb-5 mt-3' style='color: #d8d4cf')
             each ch in val
               tr(style='text-align: left;')
                 td(style='width: 50%')=ch.pov

@@ -1,12 +1,12 @@
 html
   include head
-  body
-    div(class='mt-5' style='max-width: 1080px; margin: auto')
+  body(style='background-color: rgb(17, 18, 19)')
+    div(class='mt-5' style='max-width: 980px; margin: auto;color: #d8d4cf')
       div(class='pl-3')
         a(href='/') <<
       div(style='text-align: center;')
         h5=title
-      table(class='table mt-3')
+      table(class='table mt-3' style='color: #d8d4cf')
         each ch in chapters
           tr(style='text-align: left;')
             td
@@ -17,7 +17,4 @@ html
             td=ch.suffix
             td(style='font-size: 12px;')=ch.headline
             td(style='text-align: right')
-              if ch.url
-                a(href=ch.url target='_blank' )=ch.page
-              else
-                span=ch.page
+              span=ch.page
