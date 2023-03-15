@@ -6,15 +6,15 @@ html
         a(href='/') <<
       div(style='text-align: center;')
         h5=title
-      table(class='table mt-3' style='color: #d8d4cf')
+      table(class='table mt-3' style='color: #d8d4cf; font-size: 14px')
         each ch in chapters
           tr(style='text-align: left')
-            td(style='width: 200px')
+            td(style='max-width: fit-content')
               if ch.pov.indexOf('logue') > -1
                 span=ch.pov
               else
                 a(href='/character/' + ch.character)=ch.pov
             td=ch.suffix
-            td(style='font-size: 12px;')=ch.headline
+            td=ch.headline
             td(style='text-align: right')
               span=ch.page
