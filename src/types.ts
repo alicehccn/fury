@@ -19,10 +19,3 @@ interface Character {
   role?: string[],
   house?: string,
 }
-
-interface House {
-  id?: string,
-  lastname: string,
-  sigil?: string,
-  words?: string,
-}

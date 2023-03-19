@@ -3,14 +3,13 @@ html
     include head
   body(style='background-color: #22272e; color: #adbac7')
     div(class='mt-5' style='max-width: 980px; margin: auto')
-      div(style='text-align: center;')
-        h1(class='page-header mb-5') Index of Ice and Fire
-      div(class='mt-5' style='text-align: center;')
+      h1(class='page-header mb-5 text-center') Index of Ice and Fire
+      div(class='mt-5')
         for title, k in titles
-          h5(style='text-align: center')
+          h5
             a(href='/title/'+k)=key
           table(class='table mt-3')
-            tr(style='text-align: left; color: #d8d4cf')
+            tr
               td
                 each ch in title
                   p

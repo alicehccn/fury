@@ -24,21 +24,6 @@ export async function getChaptersByTitle (slug: string) {
   return html
 }
 
-export async function getCharactersByHouse(house: string) {
-  const result = await db.getCharactersByHouse(house)
-  const words = result.rows[0]?.words
-  const characters = {}
-  result.rows.forEach((row) => {
-    if (characters[row.name]) {
-      characters[row.name].push(row)
-    } else {
-      characters[row.name] = [row]
-    }
-  })
-  const html = pug.renderFile(path.join(__dirname, '../views/house.pug'), {characters, house, words})
-  return html
-}
-
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
   const temp = await db.getCharacterSummaries()
@@ -112,8 +97,3 @@ export async function addHouse (house: string, sigil: string, words: string) {
   }
 }
 
-export async function getAllHouses () {
-  const houses = await db.getAllHouses()
-  const html = pug.renderFile(path.join(__dirname, '../views/houses.pug'), {houses: houses.rows})
-  return html
-}

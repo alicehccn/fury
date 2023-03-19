@@ -19,15 +19,6 @@ export async function getChaptersByTitle (title: string, res: Response) {
   }
 }
 
-export async function getCharactersByHouse (house: string, res: Response) {
-  try {
-    const characters = await service.getCharactersByHouse(house)
-    res.send(characters)
-  } catch(error) {
-    res.send(error)
-  }
-}
-
 export async function getChaptersByCharacter(name: string, res: Response) {
   try {
     const chapters = await service.getChaptersByCharacter(name)
@@ -79,14 +70,5 @@ export async function addHouse (house: string, sigil: string, words: string, res
     res.send(result)
   } catch (error) {
     return error
-  }
-}
-
-export async function getAllHouses (res: Response) {
-  try {
-    const houses = await service.getAllHouses()
-    res.send(houses)
-  } catch(error) {
-    res.send(error)
   }
 }
