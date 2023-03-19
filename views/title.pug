@@ -9,11 +9,11 @@ html
       table(class='table mt-3' style='color: #d8d4cf; font-size: 14px')
         each ch in chapters
           tr(style='text-align: left')
-            td(style='max-width: fit-content')
-              if ch.pov.indexOf('logue') > -1
-                span=ch.pov
-              else
+            td(style='max-width: 100px')
+              if ch.character
                 a(href='/character/' + ch.character)=ch.pov
+              else
+                span=ch.pov
             td=ch.suffix
             td=ch.headline
             td(style='text-align: right')
