@@ -1,20 +1,18 @@
 html
   include head
-  body(style='background-color: rgb(17, 18, 19)')
-    div(class='mt-5' style='max-width: 980px; margin: auto;color: #d8d4cf')
-      div(class='pl-3')
-        a(href='/') <<
-      div(style='text-align: center;')
-        h5=title
-      table(class='table mt-3' style='color: #d8d4cf; font-size: 14px')
+  body(style='background-color: #22272e; color: #adbac7')
+    div(class='mt-5' style='max-width: 980px; margin: auto')
+      a(class='pl-3' href='/') <<
+      h5(class='text-center')=title
+      table(class='table table-dark mt-3')
         each ch in chapters
-          tr(style='text-align: left')
-            td(style='max-width: 100px')
+          tr
+            td(class='mw-100')
               if ch.character
                 a(href='/character/' + ch.character)=ch.pov
               else
                 span=ch.pov
             td=ch.suffix
-            td=ch.headline
-            td(style='text-align: right')
+            td(class='font-italic font-weight-light text-muted' style='font-size: 14px')=ch.headline
+            td(class='text-sm-right')
               span=ch.page
