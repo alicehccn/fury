@@ -1,14 +1,13 @@
 html
   include head
   body(style='background-color: #22272e; color: #d8d4cf')
-    div(class='mt-5 pl-1' style='max-width: 1080px; margin: auto')
+    div(class='mt-5' style='max-width: 980px; margin: auto')
       div(class='pl-1')
         h1(class='pl-2 mb-4' )=header
         table(class='table table-dark')
           tr
             td(style='width: 150px') House
-            td
-              a(href='/'+house+'/characters')=house 
+            td=house
           tr 
             td Total Chapters
             td=total
@@ -25,7 +24,4 @@ html
                 td(style='width: 50%')=ch.pov
                 td=ch.suffix
                 td(style='text-align: right;')
-                  if ch.url
-                    a(href=ch.url target='_blank' )=ch.page
-                  else
-                    span=ch.page
+                  span=ch.page
