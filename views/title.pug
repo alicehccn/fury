@@ -7,12 +7,12 @@ html
       table(class='table table-dark mt-3')
         each ch in chapters
           tr
-            td(class='mw-100')
+            td(style='max-width: 100px')
               if ch.character
                 a(href='/character/' + ch.character)=ch.pov
               else
                 span=ch.pov
             td=ch.suffix
-            td(class='font-italic font-weight-light text-muted' style='font-size: 14px')=ch.headline
+            td(class='font-italic font-weight-light text-muted' style='font-size: 14px')=ch.headline || ch.location
             td(class='text-right')
               span=ch.page

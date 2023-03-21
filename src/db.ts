@@ -74,7 +74,7 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.page, chp.title, r.character, m.url
+      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title, r.character, m.url
       FROM chapters chp
       LEFT JOIN roles r
       ON r.role = chp.pov
@@ -347,6 +347,24 @@ export async function createTables () {
           url VARCHAR(50),
           chapter VARCHAR(50),
         UNIQUE(url, chapter)
+      )`
+    )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        lands (
+          id VARCHAR(50) PRIMARY KEY,
+          land VARCHAR(50),
+          continent VARCHAR(50),
+        UNIQUE(land, continent)
+      )`
+    )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        castles (
+          id VARCHAR(50) PRIMARY KEY,
+          castle VARCHAR(50),
+          land VARCHAR(50),
+        UNIQUE(land, castle)
       )`
     )
   } catch (error) {
