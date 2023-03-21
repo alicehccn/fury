@@ -18,11 +18,11 @@ html
         for val, key in chapters
           h5
             a(href='/title/'+val[0].slug)=key
-          table(class='table table-dark mb-5 mt-3' style='font-size: 14px')
+          table(class='table table-dark mb-5 mt-3' style='font-size: 15px')
             each ch in val
               tr
                 td(class='w-25')=ch.pov
                 td=ch.suffix
-                td(class='font-italic text-muted' style='font-size: 12px')=ch.location
+                td(class='font-italic text-muted' style='font-size: 14px')=ch.location
                 td(class='text-right')
                   span=ch.page
