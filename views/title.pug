@@ -4,7 +4,7 @@ html
     div(class='mt-5' style='max-width: 980px; margin: auto')
       a(class='pl-3' href='/') <<
       h5(class='text-center')=title
-      table(class='table table-dark mt-3 font-italic font-weight-light')
+      table(class='table table-dark mt-3 font-weight-light')
         each ch in chapters
           tr
             td(style='max-width: 150px')
@@ -13,6 +13,6 @@ html
               else
                 span=ch.pov
             td=ch.suffix
-            td(class='text-muted' style='font-size: 14px')=ch.headline || ch.location
+            td(class='font-italic text-muted' style='font-size: 14px')=ch.headline || ch.location
             td(class='text-right')
               span=ch.page
