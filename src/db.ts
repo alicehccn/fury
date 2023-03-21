@@ -111,7 +111,7 @@ export async function getTitleSummary() {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
-      SELECT r.character, chp.pov, chp.suffix, chp.page, chp.title as slug, t.title, t.volume, m.url
+      SELECT r.character, chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title as slug, t.title, t.volume, m.url
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role
