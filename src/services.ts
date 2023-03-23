@@ -36,7 +36,9 @@ export async function getChaptersByLocation(location: string) {
       chapters[row.title] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/location.pug'), {header: location, chapters, continent, total})
+  const characterRows = await db.getCharactesByLocation(location)
+  const appearance = characterRows.rows
+  const html = pug.renderFile(path.join(__dirname, '../views/location.pug'), {header: location, chapters, continent, total, appearance})
   return html
 }
 

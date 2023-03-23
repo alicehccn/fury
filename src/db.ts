@@ -150,6 +150,24 @@ export async function getChaptersByLocation(location: string) {
   }
 }
 
+export async function getCharactesByLocation(location: string) {
+  try {
+    const result = await pool.query(`
+    select distinct(r.character) from lands l
+    left join chapters c
+    on c.location = l.land
+    inner join roles r 
+    on r.role = c.pov
+    where c.location = $1
+    order by r.character
+    `,[location]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`

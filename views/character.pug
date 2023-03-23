@@ -3,10 +3,10 @@ html
   body(style='background-color: #22272e; color: #d8d4cf')
     div(class='mt-5' style='max-width: 980px; margin: auto')
       div(class='pl-1')
-        h1(class='pl-2 mb-4')=header
+        h2(class='pl-2 mb-4')=header
         table(class='table table-dark')
           tr
-            td(class='w-25') House
+            td(class='w-50') House
             td=house
           tr 
             td Total Chapters
@@ -24,6 +24,7 @@ html
                 td(class='w-25')=ch.pov
                 td=ch.suffix
                 td(class='font-italic text-muted d-none d-sm-block' style='font-size: 14px')=ch.headline
-                td(class='font-italic text-muted text-right' style='font-size: 14px')=ch.location
+                td(class='font-italic text-muted text-right' style='font-size: 14px')
+                  a(href='/location/' + ch.location)=ch.location
                 td(class='text-right')
                   span=ch.page
