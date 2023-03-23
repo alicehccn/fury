@@ -24,6 +24,22 @@ export async function getChaptersByTitle (slug: string) {
   return html
 }
 
+export async function getChaptersByLocation(location: string) {
+  const result = await db.getChaptersByLocation(location)
+  const total = result.rowCount
+  const continent = result.rows[0]?.continent
+  const chapters = {}
+  result.rows.forEach((row: Title) => {
+    if (chapters[row.title]) {
+      chapters[row.title].push(row)
+    } else {
+      chapters[row.title] = [row]
+    }
+  })
+  const html = pug.renderFile(path.join(__dirname, '../views/location.pug'), {header: location, chapters, continent, total})
+  return html
+}
+
 export async function getChaptersByCharacter(name: string) {
   const result = await db.getChaptersByCharacter(name)
   const temp = await db.getCharacterSummaries()

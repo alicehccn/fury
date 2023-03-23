@@ -129,6 +129,27 @@ export async function getChaptersByCharacter(name: string) {
   }
 }
 
+export async function getChaptersByLocation(location: string) {
+  try {
+    const result = await pool.query(`
+      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, chp.title as slug, t.volume, t.title
+      FROM chapters chp
+      INNER JOIN roles r
+      ON chp.pov = r.role
+      INNER JOIN titles t
+      ON t.slug = chp.title
+      LEFT JOIN lands l
+      ON l.land = chp.location
+      where l.land = $1
+      ORDER BY t.volume, chp.page
+    `,[location]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getAllCharacters() {
   try {
     const result = await pool.query(`

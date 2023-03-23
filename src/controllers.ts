@@ -28,6 +28,15 @@ export async function getChaptersByCharacter(name: string, res: Response) {
   }
 }
 
+export async function getChaptersByLocation(location: string, res: Response) {
+  try {
+    const chapters = await service.getChaptersByLocation(location)
+    res.send(chapters)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
 export async function addChapter(name: string, page: string | number, title: string, res: Response) {
   try {
     const result = await service.addChapter(name, page, title)

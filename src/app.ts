@@ -18,6 +18,11 @@ app.get('/character/:name', (req, res) => {
   controller.getChaptersByCharacter(character, res)
 })
 
+app.get('/location/:location', (req, res) => {
+  const location = req?.params.location
+  controller.getChaptersByLocation(location, res)
+})
+
 app.post('/chapter/new', (req, res) => {
   const {name, page, title} = req.query
   controller.addChapter(name as string, page as string, title as string, res)
