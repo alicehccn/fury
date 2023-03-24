@@ -10,10 +10,10 @@ html
             a(href='/title/'+k)=key
           table(class='table mt-3 table-dark text-left')
             tr
+              td(class='align-middle text-left')
+                a(href='/title/'+title[0].slug class='text-uppercase')=title[0].slug
               td
                 each ch in title
-                  p
+                  span(class='mr-2 mb-2 d-inline-block')
                     a(href='/character/'+ch.character)=ch.character
                     sup=ch.count
-              td(class='align-middle text-right')
-                a(href='/title/'+title[0].slug)=k
