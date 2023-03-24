@@ -8,9 +8,9 @@ html
         for title, k in titles
           h5
             a(href='/title/'+k)=key
-          table(class='table mt-3 table-dark text-left')
+          table(class='table table-dark text-left')
             tr
-              td(class='align-middle text-left')
+              td(class='align-middle text-left w-25')
                 a(href='/title/'+title[0].slug class='text-uppercase')=title[0].slug
               td
                 each ch in title
