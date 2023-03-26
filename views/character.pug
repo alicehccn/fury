@@ -2,18 +2,19 @@ html
   include head
   body(style='background-color: #22272e')
     div(style='max-width: 980px; margin: auto')
-      div(class='sticky-top pt-4 pb-2' style='background-color: #22272e;')
-        h2(style='color: #fff' class='p-2')=header
-        table(class='table table-borderless mb-1' style='font-size: 15px; color: #fff')
-          tr
-            td(class='w-25') House
-            td=house
-          tr 
-            td Chapters
-            td=total
-          tr 
-            td Rank
-            td=rank
+      div(class='sticky-top py-4 pl-2 d-flex' style='background-color: #22272e; color: #fff; height: fit-content')
+        h2(class='mr-3')=header
+        span(class='text-muted align-middle')=alias
+      table(class='table table-borderless mb-1' style='font-size: 15px; color: #fff')
+        tr
+          td(class='w-25') House
+          td=house
+        tr 
+          td Chapters
+          td=total
+        tr 
+          td Rank
+          td=rank
       div(class='text-center')
         for val, key in chapters
           h5

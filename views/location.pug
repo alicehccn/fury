@@ -2,9 +2,9 @@ html
   include head
   body(style='background-color: #22272e;')
     div(style='max-width: 980px; margin: auto')
-      div(class='sticky-top pt-4 pb-2' style='background-color: #22272e')
-        h2(style='color: #fff' class='p-2')=header
-        table(class='table table-borderless text-left mb-1' style='font-size: 15px; color: #fff')
+      div(class='sticky-top pt-4 pb-2 d-block d-sm-flex' style='background-color: #22272e; height: fit-content;')
+        h2(style='color: #fff; margin: auto;' class='w-50 pl-2')=header
+        table(class='table table-borderless text-left mb-1' style='font-size: 15px; color: #fff;')
           tr
             td(class='w-25') Continent
             td=continent
@@ -12,7 +12,7 @@ html
             td Chapters
             td=total
           tr 
-            td Appearances
+            td Appearance
             td
               each chr in appearance
                 span(class='mr-2 mb-2 d-inline-block')

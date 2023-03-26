@@ -2,9 +2,9 @@ html
   include head
   body(style='background-color: #22272e; color: #adbac7')
     div(style='max-width: 980px; margin: auto')
-      div(class='sticky-top pt-4 pb-2 pl-2' style='background-color: #22272e')
+      div(class='sticky-top pt-5 pb-2 pl-2' style='background-color: #22272e; height: fit-content')
+        h3(class='text-center')=title
         a(class='pl-3' href='/') <<
-        h4(class='text-center sticky-top')=title
       table(class='table table-dark mt-3' style='font-size: 15px')
         each ch in chapters
           tr

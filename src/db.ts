@@ -199,6 +199,7 @@ export async function getCharacterSummaries() {
     const result = await pool.query(`
       SELECT
         r.character,
+        chr.alias,
         chr.house,
         count(chp.id) AS count,
         RANK() OVER(ORDER BY count(chp.id) DESC) rank
@@ -207,7 +208,7 @@ export async function getCharacterSummaries() {
       ON r.role = chp.pov
       LEFT OUTER JOIN characters chr
       ON chr.name = r.character
-      GROUP BY r.character, chr.house
+      GROUP BY r.character, chr.alias, chr.house
       ORDER BY count DESC
     `)
     return result
