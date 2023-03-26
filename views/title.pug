@@ -1,9 +1,10 @@
 html
   include head
   body(style='background-color: #22272e; color: #adbac7')
-    div(class='mt-5' style='max-width: 980px; margin: auto')
-      a(class='pl-3' href='/') <<
-      h5(class='text-center')=title
+    div(style='max-width: 980px; margin: auto')
+      div(class='sticky-top pt-5 pb-4 pl-2' style='background-color: #22272e')
+        a(class='pl-3' href='/') <<
+        h4(class='text-center sticky-top')=title
       table(class='table table-dark mt-3' style='font-size: 15px')
         each ch in chapters
           tr
