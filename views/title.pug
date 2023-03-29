@@ -2,6 +2,8 @@ html
   include head
   body(style='background-color: #22272e; color: #adbac7')
     div(style='max-width: 980px; margin: auto')
+      if modalOpen 
+        include modal
       div(class='sticky-top pt-5 pb-2 pl-2' style='background-color: #22272e; height: fit-content')
         h3(class='text-center')=title
         a(class='pl-3' href='/') <<
@@ -14,10 +16,10 @@ html
               else
                 span=ch.pov
             td=ch.suffix
-            td(class='font-italic text-muted d-none d-sm-block' style='font-size: 14px')
-              a(href='/title/'+slug+'/'+ch.page)=ch.headline
+            td(class='font-italic text-muted d-none d-sm-block' style='font-size: 14px')=ch.headline
             td(class='text-muted text-right' style='font-size: 14px')
               a(href='/location/' + ch.location)=ch.location
             td(class='text-right')
-              span=ch.page
+              span
+                a(href='/title/'+slug+'/'+ch.page)=ch.page
     include footer
