@@ -20,7 +20,15 @@ export async function getAllTitles () {
 export async function getChaptersByTitle (slug: string) {
   const result = await db.getChaptersByTitle(slug)
   const title = await db.getTitleBySlug(slug)
-  const html = pug.renderFile(path.join(__dirname, '../views/title.pug'), {title: title.rows[0].title, chapters: result.rows})
+  const html = pug.renderFile(path.join(__dirname, '../views/title.pug'), {title: title.rows[0].title, chapters: result.rows, slug})
+  return html
+}
+
+export async function getChapterDetails (slug: string, page: string) {
+  const chapterDetails = await db.getChapterDetails(slug, page)
+  const allChapters = await db.getChaptersByTitle(slug)
+  const title = await db.getTitleBySlug(slug)
+  const html = pug.renderFile(path.join(__dirname, '../views/title-chapter.pug'), {title: title.rows[0].title, chapters: allChapters.rows, slug, chapterDetails})
   return html
 }
 

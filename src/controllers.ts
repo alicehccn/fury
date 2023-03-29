@@ -73,6 +73,15 @@ export async function addRole (character: string, role: string, res: Response) {
   }
 }
 
+export async function getChapterDetails(title: string, page: string, res: Response) {
+  try {
+    const result = await service.getChapterDetails(title, page)
+    res.send(result)
+  } catch (error) {
+    return error
+  }
+}
+
 export async function addHouse (house: string, sigil: string, words: string, res: Response) {
   try {
     const result = await service.addHouse(house, sigil, words)
