@@ -8,5 +8,6 @@ div(class="modal d-block" tabindex="-1" role="dialog")
             a(href='/title/'+slug) &times;
       div(class="modal-body")
         div=details.pov
-        img(src=details.img alt="test" class='w-100' style='')
+        if details.img
+          img(src=details.img alt="test" class='w-100')
         
