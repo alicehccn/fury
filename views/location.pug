@@ -4,7 +4,7 @@ html
     div(style='max-width: 980px; margin: auto')
       div(class='sticky-top pt-4 pb-2 d-block d-sm-flex' style='background-color: #22272e; height: fit-content;')
         h2(style='color: #fff; margin: auto;' class='w-50 pl-2')=header
-        table(class='table table-borderless text-left mb-1' style='font-size: 15px; color: #fff;')
+        table(class='table table-borderless text-left mb-1 fs-6 text-light')
           tr
             td(class='w-25') Continent
             td=continent
@@ -21,7 +21,7 @@ html
         for val, key in chapters
           h5
             a(href='/title/'+val[0].slug)=key
-          table(class='table table-dark mb-5 mt-3' style='font-size: 15px')
+          table(class='table table-dark mb-5 mt-3 fs-6')
             each chp in val
               tr
                 td(class='w-25')=chp.pov

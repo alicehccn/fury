@@ -6,19 +6,16 @@ html
         include modal
       div(class='sticky-top pt-5 pb-2 pl-2' style='background-color: #22272e; height: fit-content')
         h3(class='text-center')=title
-        a(class='pl-3' href='/') <<
-      table(class='table table-hover table-dark mt-3' style='font-size: 15px; margin-bottom: 4em')
+      table(class='table table-hover table-dark mt-3 text-light' style='font-size: 15px; margin-bottom: 4em;')
         each ch in chapters
           tr
-            td(class='w-25')
+            td(class='w-25 align-middle')
               if ch.character
-                a(href='/character/' + ch.character)=ch.pov
+                a=ch.pov
               else
                 span=ch.pov
-            td=ch.suffix
-            td(class='font-italic text-muted d-none d-sm-block' style='font-size: 14px')=ch.headline
-            td(class='text-muted text-right' style='font-size: 14px')=ch.location
-            td(class='text-right')
-              span
-                a(href='/title/'+slug+'/'+ch.page)=ch.page
+            td(class='align-middle')=ch.suffix
+            td(class='font-italic text-muted' style='font-size: 14px')=ch.headline
+            td(class='text-right align-middle')
+              a(class='text-light' href='/title/'+slug+'/'+ch.page)=ch.page
     include footer
