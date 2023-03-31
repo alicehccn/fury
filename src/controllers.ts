@@ -73,9 +73,9 @@ export async function addRole (character: string, role: string, res: Response) {
   }
 }
 
-export async function getChapterDetails(title: string, page: string, res: Response) {
+export async function getChapterDetails(title: string, chapter: string, res: Response) {
   try {
-    const result = await service.getChapterDetails(title, page)
+    const result = await service.getChapterDetails(title, chapter)
     res.send(result)
   } catch (error) {
     return error

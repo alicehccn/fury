@@ -13,10 +13,10 @@ app.get('/title/:title', (req, res) => {
   controller.getChaptersByTitle(title, res)
 })
 
-app.get('/title/:title/:page', (req, res) => {
+app.get('/title/:title/:chapter', (req, res) => {
   const title = req?.params.title
-  const page = req?.params.page
-  controller.getChapterDetails(title, page, res)
+  const chapter = req?.params.chapter
+  controller.getChapterDetails(title, chapter, res)
 })
 
 app.get('/character/:name', (req, res) => {
