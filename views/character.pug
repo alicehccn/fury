@@ -1,11 +1,11 @@
 html
   include head
-  body(style='background-color: #22272e')
-    div(style='max-width: 980px; margin: auto')
-      div(class='sticky-top py-4 pl-2 d-flex text-light' style='background-color: #22272e; height: fit-content')
-        h2(class='mr-3')=header
+  body(style='background-color: #22272e; color: #adbac7')
+    div(style='max-width: 980px; margin: auto;')
+      div(class='sticky-top py-4 pl-2 d-flex' style='background-color: #22272e; height: fit-content')
+        h2(class='mr-3 text-light')=header
         span(class='text-muted align-middle')=alias
-      table(class='table table-borderless mb-1 text-light fs-6')
+      table(class='table table-borderless mb-1  fs-6')
         tr
           td(class='w-25') House
           td=house
@@ -19,13 +19,13 @@ html
         for val, key in chapters
           h5
             a(href='/title/'+val[0].slug)=key
-          table(class='table table-dark mb-5 mt-3 fs-6')
+          table(class='table table-hover table-dark mb-5 mt-3 fs-6' style='color: #adbac7')
             each ch in val
               tr
                 td(class='w-25 text-nowrap')=ch.pov
                 td=ch.suffix
-                td(class='font-italic text-muted d-none d-sm-block' style='font-size: 14px')=ch.headline
-                td(class='text-muted text-right' style='font-size: 14px;')
+                td(class='font-italic d-none d-sm-block' style='font-size: 14px')=ch.headline
+                td(class='text-right' style='font-size: 14px;')
                 td(class='text-right' style='width: 100px')
                   span=ch.page
     include footer

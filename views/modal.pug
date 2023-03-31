@@ -3,10 +3,13 @@ div(class="modal d-block" tabindex="-1" role="dialog")
     div(class="modal-content")
       div(class="modal-header")
         h3(class='modal-title')
-          a(style='color: inherit' href='/character/'+details.character)=details.pov
-        h3(class='modal-title ml-2')=details.suffix
+          if details.character
+            a(style='color: inherit' href='/character/'+details.character)=details.pov
+          else
+            span=details.pov
+        if (details.suffix)
+          h3(class='modal-title ml-2')=details.suffix
         button(type="button" class="close" data-dismiss="modal" aria-label="Close")
-          span(aria-hidden="true")
             a(href='/title/'+slug) &times;
       div(class="modal-body")
         p=details.headline
@@ -16,5 +19,7 @@ div(class="modal d-block" tabindex="-1" role="dialog")
         div
           a(style='color: inherit' href='/location/'+details.location)=details.location+', '+details.continent
       div(class="modal-footer justify-content-between")
-        span=title
+        span='ch.' + details.chapter
+        a(style='color: inherit' href='/')=title
         span=details.page
+                
