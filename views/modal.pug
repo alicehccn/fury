@@ -16,10 +16,11 @@ div(class="modal d-block" tabindex="-1" role="dialog")
         div(class='text-right')
         if details.img
           img(src=details.img alt="test" class='w-100')
-        div
+        div(class='d-flex justify-content-between mt-2' style='text-transform:(0, -50)')
+          a(style='color: inherit' href='/title/'+details.title+'/'+previous) <<
           a(style='color: inherit' href='/location/'+details.location)=details.location+', '+details.continent
+          a(style='color: inherit' href='/title/'+details.title+'/'+next) >>
       div(class="modal-footer justify-content-between")
-        span='ch.' + details.chapter
-        a(style='color: inherit' href='/')=title
+        span='Ch.' + details.chapter
+        a(style='color: inherit' class='text-uppercase' href='/')=details.title
         span=details.page
-                

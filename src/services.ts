@@ -28,7 +28,7 @@ export async function getChapterDetails (slug: string, chapter: string) {
   const chapterDetails = await db.getChapterDetails(slug, chapter)
   const allChapters = await db.getChaptersByTitle(slug)
   const title = await db.getTitleBySlug(slug)
-  const html = pug.renderFile(path.join(__dirname, '../views/title.pug'), {title: title.rows[0].title, chapters: allChapters.rows, slug, details: chapterDetails.rows[0], modalOpen: !!chapter})
+  const html = pug.renderFile(path.join(__dirname, '../views/title.pug'), {title: title.rows[0].title, chapters: allChapters.rows, slug, details: chapterDetails.rows[0], modalOpen: !!chapter, previous: (+chapter)-1, next: (+chapter)+1})
   return html
 }
 
