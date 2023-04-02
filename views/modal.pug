@@ -4,7 +4,7 @@ div(class="modal d-block" tabindex="-1" role="dialog")
       div(class="modal-header")
         h3(class='modal-title')
           if details.character
-            a(style='color: inherit' href='/character/'+details.character)=details.pov
+            a(style='color: #8ab4f8' href='/character/'+details.character)=details.pov
           else
             span=details.pov
         if (details.suffix)
@@ -20,10 +20,10 @@ div(class="modal d-block" tabindex="-1" role="dialog")
         if details.img
           img(src=details.img alt="test" class='w-100')
         div(class='d-flex justify-content-between mt-4')
-          a(style='color: inherit' href='/title/'+details.title+'/'+previous) <<
-          a(style='color: inherit' href='/location/'+details.location)=details.location+' • '+details.continent
-          a(style='color: inherit' href='/title/'+details.title+'/'+next) >>
+          a(style='color: #8ab4f8' href='/title/'+details.title+'/'+previous) <<
+          a(style='color: #8ab4f8' href='/location/'+details.location)=details.location+' • '+details.continent
+          a(style='color: #8ab4f8' href='/title/'+details.title+'/'+next) >>
       div(class="modal-footer justify-content-between")
         span='Ch.' + details.chapter
-        a(style='color: inherit' class='text-uppercase' href='/')=details.title
+        a(style='color: #8ab4f8' class='text-uppercase' href='/')=details.title
         span=details.page

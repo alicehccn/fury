@@ -11,11 +11,11 @@ html
           tr
             td(class='w-25 align-middle')
               if ch.character
-                a=ch.pov
+                a(style='color: #8ab4f8' href='/character/'+ch.character)=ch.pov
               else
                 span=ch.pov
             td(class='align-middle')=ch.suffix
             td(class='font-italic' style='font-size: 14px')=ch.headline
             td(class='text-right align-middle')
-              a(href='/title/'+slug+'/'+ch.chapter)=ch.page
+              a(style='color: #8ab4f8' href='/title/'+slug+'/'+ch.chapter)=ch.page
     include footer
