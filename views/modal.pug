@@ -1,5 +1,5 @@
 div(class="modal d-block" tabindex="-1" role="dialog")
-  div(class="modal-dialog" role="document" style='max-width: 600px; top: 100px;')
+  div(class="modal-dialog" role="document" style='max-width: 600px; top: 10%')
     div(class="modal-content")
       div(class="modal-header")
         h3(class='modal-title')
@@ -11,14 +11,17 @@ div(class="modal d-block" tabindex="-1" role="dialog")
           h3(class='modal-title ml-2')=details.suffix
         button(type="button" class="close" data-dismiss="modal" aria-label="Close")
             a(href='/title/'+slug) &times;
+      if details.mentions
+        div(class="modal-body d-flex")
+          span(class='mr-2')=details.mentions
       div(class="modal-body")
         p=details.headline
         div(class='text-right')
         if details.img
           img(src=details.img alt="test" class='w-100')
-        div(class='d-flex justify-content-between mt-2' style='text-transform:(0, -50)')
+        div(class='d-flex justify-content-between mt-4')
           a(style='color: inherit' href='/title/'+details.title+'/'+previous) <<
-          a(style='color: inherit' href='/location/'+details.location)=details.location+', '+details.continent
+          a(style='color: inherit' href='/location/'+details.location)=details.location+' • '+details.continent
           a(style='color: inherit' href='/title/'+details.title+'/'+next) >>
       div(class="modal-footer justify-content-between")
         span='Ch.' + details.chapter

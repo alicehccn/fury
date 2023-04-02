@@ -1,12 +1,12 @@
 html
   include head
-  body(style='background-color: #22272e; color: #adbac7')
+  body(style='background-color: #22272e')
     div(style='max-width: 980px; margin: auto')
       if modalOpen 
         include modal
       div(class='sticky-top py-3 pl-2 text-light' style='background-color: #22272e; height: fit-content')
         h3(class='text-center')=title
-      table(class='table table-hover table-dark' style='font-size: 15px; margin-bottom: 4em; color: #adbac7')
+      table(class='table table-hover table-dark mb-5' style='color: #adbac7')
         each ch in chapters
           tr
             td(class='w-25 align-middle')
