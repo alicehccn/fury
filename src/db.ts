@@ -426,6 +426,14 @@ export async function createTables () {
         UNIQUE(land, castle)
       )`
     )
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS
+        mentions (
+          character VARCHAR(50),
+          chapter VARCHAR(50),
+        UNIQUE(character, chapter)
+      )`
+    )
   } catch (error) {
     console.log(error)
   }
