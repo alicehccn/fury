@@ -74,10 +74,8 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (title: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.chapter, chp.title, r.character
+      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.chapter
       FROM chapters chp
-      LEFT JOIN roles r
-      ON r.role = chp.pov
       WHERE chp.title = $1
       ORDER BY chp.page
       `, [title]
@@ -130,14 +128,12 @@ export async function getTitleSummary() {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
-      SELECT r.character, chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title as slug, t.title, t.volume, m.url
+      SELECT chp.pov, chp.suffix, chp.page, t.title, t.slug
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role
       INNER JOIN titles t
       ON t.slug = chp.title
-      LEFT JOIN media m
-      ON m.chapter = chp.id
       WHERE r.character = $1
       ORDER BY t.volume, chp.page
     `,[name]
@@ -151,7 +147,7 @@ export async function getChaptersByCharacter(name: string) {
 export async function getChaptersByLocation(location: string) {
   try {
     const result = await pool.query(`
-      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, chp.title as slug, t.volume, t.title
+      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, t.title
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role
