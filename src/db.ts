@@ -147,7 +147,7 @@ export async function getChaptersByCharacter(name: string) {
 export async function getChaptersByLocation(location: string) {
   try {
     const result = await pool.query(`
-      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, t.title
+      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, t.title, t.slug
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role

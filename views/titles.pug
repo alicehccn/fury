@@ -1,19 +1,21 @@
 html
   head
     include head
-  body(style='background-color: #22272e; color: #adbac7')
+  body(style='background-color: #22272e')
     div(style='max-width: 980px; margin: auto')
-      h2(class='sticky-top py-4 pl-2 page-header text-center') Index of Ice and Fire
+      h2(class='sticky-top py-4 pl-2 page-header text-center text-light') Index of Ice and Fire
       for title, k in titles
         h5
           a(href='/title/'+k)=key
-        table(class='table table-dark text-left')
+        table(class='table table-dark text-left' style='color: #adbac7')
           tr
-            td(class='align-middle text-left w-25')
-              a(href='/title/'+title[0].slug class='text-uppercase')=title[0].slug
+            td(class='align-middle text-left w-25')=title[0].title
+            td(class='align-middle text-center w-25 text-uppercase')
+              a(style='color: #8ab4f8' href='/title/'+title[0].slug)=title[0].slug
             td
               each ch in title
                 span(class='mr-2 mb-2 d-inline-block')
-                  a(href='/character/'+ch.character)=ch.character
-                  sup=ch.count
+                  span=ch.character
+                  sup
+                    a(style='color: #8ab4f8' href='/character/'+ch.character)=ch.count
     include footer
