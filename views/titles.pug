@@ -5,17 +5,16 @@ html
     div(style='max-width: 980px; margin: auto')
       div(class='sticky-top py-4 pl-2 page-header text-center' style='background-color: #22272e; height: fit-content')
         h4 Index of Ice and Fire
-      for title, k in titles
-        h5
-          a(href='/title/'+k)=key
-        table(class='table table-dark text-left' style='color: #adbac7')
-          tr
-            td(class='align-middle text-center w-50 bg-secondary')
-              a(style='color: #8ab4f8' href='/title/'+title[0].slug)=title[0].title
-            td
-              each ch in title
-                span(class='mr-2 mb-2 d-inline-block')
-                  span=ch.character
-                  sup
-                    a(style='color: #8ab4f8' href='/character/'+ch.character)=ch.count
+      div(class='mb-5')
+        for title, k in titles
+          table(class='table table-dark text-left' style='color: #adbac7')
+            tr
+              td(class='align-middle text-center w-50 bg-secondary')
+                a(style='color: #8ab4f8' href='/title/'+title[0].slug)=title[0].title
+              td
+                each ch in title
+                  span(class='mr-2 mb-2 d-inline-block')
+                    span=ch.character
+                    sup
+                      a(style='color: #8ab4f8' href='/character/'+ch.character)=ch.count
     include footer
