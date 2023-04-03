@@ -20,9 +20,17 @@ div(class="modal d-block" tabindex="-1" role="dialog")
         if details.img
           img(src=details.img alt="test" class='w-100')
         div(class='d-flex justify-content-between mt-4')
-          a(style='color: #8ab4f8' href='/title/'+details.title+'/'+previous) <<
+          div
+            if prev
+              a(style='color: #8ab4f8' href='/title/'+details.title+'/'+prev) <<
+            else 
+              span <<
           a(style='color: #8ab4f8' href='/location/'+details.location)=details.location+' • '+details.continent
-          a(style='color: #8ab4f8' href='/title/'+details.title+'/'+next) >>
+          div
+            if next
+              a(style='color: #8ab4f8' href='/title/'+details.title+'/'+next) >>
+            else 
+              span >>
       div(class="modal-footer justify-content-between")
         span='Ch.' + details.chapter
         a(style='color: #8ab4f8' class='text-uppercase' href='/')=details.title

@@ -27,3 +27,19 @@ export function romanizedInt(num: number) {
   }
   return string
 }
+
+export function getPrevNextChapter (current: number, total: number) {
+  let prev:number
+  let next:number
+  if (current > 0) {
+    prev = current-1
+  } else {
+    prev = null
+  }
+  if (current < total) {
+    next = current+1
+  } else {
+    next = null
+  }
+  return [prev, next]
+}
