@@ -91,12 +91,10 @@ export async function getChaptersByTitle (slug: string) {
 export async function getChapterDetails(title: string, chapter: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title, chp.chapter, r.character, m.img, l.continent
+      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title, chp.chapter, r.character, chp.image, l.continent
       FROM chapters chp
       LEFT JOIN roles r
       ON r.role = chp.pov
-      LEFT JOIN media m
-      ON m.chapter = chp.id
       LEFT JOIN lands l
       ON l.land = chp.location
       WHERE chp.title = $1
