@@ -71,16 +71,16 @@ export async function getAllChapters() {
   }
 }
 
-export async function getChaptersByTitle (title: string) {
+export async function getChaptersByTitle (slug: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.chapter, t.title
+      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.chapter, t.title, t.volume
       FROM chapters chp
       LEFT JOIN titles t
       ON t.slug = chp.title
       WHERE chp.title = $1
       ORDER BY chp.page
-      `, [title]
+      `, [slug]
     )
     return result
   } catch (error) {
