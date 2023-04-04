@@ -47,7 +47,7 @@ export async function getChaptersByLocation(location: string) {
   })
   const characterRows = await db.getCharactesByLocation(location)
   const visitors = characterRows.rows
-  const html = pug.renderFile(path.join(__dirname, '../views/location.pug'), {header: location, chapters, continent, total, visitors})
+  const html = pug.renderFile(path.join(__dirname, '../views/location.pug'), {header: location, chapters, continent, total, visitors, title: location})
   return html
 }
 
@@ -65,7 +65,7 @@ export async function getChaptersByCharacter(name: string) {
       chapters[row.title] = [row]
     }
   })
-  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters, total, house, rank, alias})
+  const html = pug.renderFile(path.join(__dirname, '../views/character.pug'), {header: name, chapters, total, house, rank, alias, title: name})
   return html
 }
 

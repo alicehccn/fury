@@ -2,22 +2,9 @@ html
   include head
   body(style='background-color: #22272e; color: #adbac7')
     div(style='max-width: 980px; margin: auto')
-      div(class='sticky-top pt-4 pb-2 d-block d-sm-flex' style='background-color: #22272e; height: fit-content;')
-        h2(style='color: #fff; margin: auto;' class='w-50 pl-2')=header
-        table(class='table table-borderless text-left mb-1 fs-6' style='color: #adbac7')
-          tr
-            td(class='w-25') Continent
-            td=continent
-          tr 
-            td Chapters
-            td=total
-          tr 
-            td Visitors
-            td
-              each v in visitors
-                span(class='mr-2 mb-2 d-inline-block')
-                  a(style='color: #8ab4f8' href='/character/' + v.character)=v.character 
-      div(class='mt-5 text-center')
+      div(class='sticky-top py-2 text-light' style='background-color: #22272e; height: fit-content')
+        include breadcrumb
+      div(class='text-center')
         for val, key in chapters
           h5
             a(style='color: #8ab4f8' href='/title/'+val[0].slug)=key

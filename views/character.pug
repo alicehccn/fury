@@ -2,19 +2,8 @@ html
   include head
   body(style='background-color: #22272e;')
     div(style='max-width: 980px; margin: auto;')
-      div(class='sticky-top py-4 pl-2 d-flex' style='background-color: #22272e; height: fit-content')
-        h2(class='mr-3 text-light')=header
-        span(class='align-middle text-muted')=alias
-      table(class='table table-borderless mb-1 fs-6' style='color: #adbac7')
-        tr
-          td(class='w-25') House
-          td=house
-        tr 
-          td Chapters
-          td=total
-        tr 
-          td Rank
-          td=rank
+      div(class='sticky-top py-2 text-light' style='background-color: #22272e; height: fit-content')
+        include breadcrumb
       div(class='text-center')
         for val, key in chapters
           h5
@@ -24,7 +13,7 @@ html
               tr
                 td(class='w-25 text-nowrap')=ch.pov
                 td=ch.suffix
-                td(class='font-italic' style='font-size: 14px')=ch.headline
+                td(class='font-italic d-none d-sm-block' style='font-size: 14px')=ch.headline
                 td(class='text-right' style='font-size: 14px;')
                 td(class='text-right' style='width: 100px')
                   span=ch.page
