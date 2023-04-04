@@ -1,0 +1,12 @@
+div(class='text-center')
+  for val, key in chapters
+    h5
+      a(style='color: #8ab4f8' href='/title/'+val[0].slug)=key
+    table(class='table table-dark table-hover mb-5 mt-3 fs-6' style='color: #adbac7')
+      each chp in val
+        tr
+          td(class='w-25')=chp.pov
+          td=chp.suffix
+          td(class='font-italic' style='font-size: 14px')=chp.headline
+          td(class='text-right')
+            span=chp.page

@@ -1,11 +1,12 @@
-nav(aria-label="breadcrumb")
-  ol(class="breadcrumb mb-0" style='background-color: #22272e !important')
-    li(class="breadcrumb-item")
+div(class='sticky-top py-2 text-light' style='background-color: #22272e; height: fit-content')
+  nav(aria-label="breadcrumb")
+    ol(class="breadcrumb mb-0" style='background-color: #22272e !important')
+      li(class="breadcrumb-item")
+        if title
+          a(style='color: #8ab4f8' href="/") Home
+        else 
+          span Home
       if title
-        a(style='color: #8ab4f8' href="/") Home
-      else 
-        span Home
-    if title
-      li(class="breadcrumb-item active" aria-current="page")=title
+        li(class="breadcrumb-item active" aria-current="page")=title
       
 

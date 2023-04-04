@@ -4,8 +4,7 @@ html
     div(style='max-width: 980px; margin: auto;')
       if modalOpen 
         include modal
-      div(class='sticky-top py-2 text-light' style='background-color: #22272e; height: fit-content')
-        include breadcrumb
+      include breadcrumb
       table(class='table table-hover table-dark mb-5' style='color: #adbac7')
         each ch in chapters
           tr

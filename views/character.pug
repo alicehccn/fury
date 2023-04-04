@@ -2,19 +2,7 @@ html
   include head
   body(style='background-color: #22272e;')
     div(style='max-width: 980px; margin: auto;')
-      div(class='sticky-top py-2 text-light' style='background-color: #22272e; height: fit-content')
-        include breadcrumb
+      include breadcrumb
       div(class='text-center')
-        for val, key in chapters
-          h5
-            a(style='color: #8ab4f8' href='/title/'+val[0].slug)=key
-          table(class='table table-hover table-dark mb-5 mt-3 fs-6' style='color: #adbac7')
-            each ch in val
-              tr
-                td(class='w-25 text-nowrap')=ch.pov
-                td=ch.suffix
-                td(class='font-italic d-none d-sm-block' style='font-size: 14px')=ch.headline
-                td(class='text-right' style='font-size: 14px;')
-                td(class='text-right' style='width: 100px')
-                  span=ch.page
+        include chapters
     include footer
