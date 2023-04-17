@@ -6,11 +6,6 @@ html
       if modalOpen 
         include modal
       table(class='table table-hover table-dark mb-5' style='color: #adbac7')
-        each ch in chapters
-          tr
-            td(class='w-25 align-middle text-light')=ch.pov
-            td(class='align-middle')=ch.suffix
-            td(class='font-italic' style='font-size: 14px')=ch.headline
-            td(class='text-right align-middle')
-              a(style='color: #8ab4f8' href='/title/'+slug+'/'+ch.chapter)=ch.page
+        each chp in chapters
+          include chapter
     include footer

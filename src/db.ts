@@ -74,7 +74,7 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (slug: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.chapter, t.title, t.volume
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
       FROM chapters chp
       LEFT JOIN titles t
       ON t.slug = chp.title
@@ -88,17 +88,57 @@ export async function getChaptersByTitle (slug: string) {
   }
 }
 
+export async function getChaptersByCharacter(name: string) {
+  try {
+    const result = await pool.query(`
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
+      FROM chapters chp
+      INNER JOIN roles r
+      ON chp.pov = r.role
+      INNER JOIN titles t
+      ON t.slug = chp.title
+      WHERE r.character = $1
+      ORDER BY t.volume, chp.page
+    `,[name]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getChaptersByLocation(location: string) {
+  try {
+    const result = await pool.query(`
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
+      FROM chapters chp
+      INNER JOIN roles r
+      ON chp.pov = r.role
+      INNER JOIN titles t
+      ON t.slug = chp.title
+      LEFT JOIN lands l
+      ON l.land = chp.location
+      where l.land = $1
+      ORDER BY t.volume, chp.page
+    `,[location]
+    )
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
 export async function getChapterDetails(title: string, chapter: string) {
   try {
     const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title, chp.chapter, r.character, chp.image, l.continent
+      SELECT chp.pov, chp.suffix, chp.headline, chp.location, chp.page, chp.title, chp.number, r.character, chp.image, l.continent
       FROM chapters chp
       LEFT JOIN roles r
       ON r.role = chp.pov
       LEFT JOIN lands l
       ON l.land = chp.location
       WHERE chp.title = $1
-      AND chp.chapter = $2
+      AND chp.number = $2
       `, [title, chapter]
     )
     return result
@@ -119,46 +159,6 @@ export async function getTitleSummary() {
       GROUP by t.volume, t.title, t.slug, r.character
       ORDER BY t.volume, t.title, count desc
     `)
-    return result
-  } catch (error) {
-    return error
-  }
-}
-
-export async function getChaptersByCharacter(name: string) {
-  try {
-    const result = await pool.query(`
-      SELECT chp.pov, chp.suffix, chp.page, t.title, t.slug, chp.headline
-      FROM chapters chp
-      INNER JOIN roles r
-      ON chp.pov = r.role
-      INNER JOIN titles t
-      ON t.slug = chp.title
-      WHERE r.character = $1
-      ORDER BY t.volume, chp.page
-    `,[name]
-    )
-    return result
-  } catch (error) {
-    return error
-  }
-}
-
-export async function getChaptersByLocation(location: string) {
-  try {
-    const result = await pool.query(`
-      SELECT l.land, l.continent, chp.pov, chp.suffix, chp.headline, chp.page, t.title, t.slug
-      FROM chapters chp
-      INNER JOIN roles r
-      ON chp.pov = r.role
-      INNER JOIN titles t
-      ON t.slug = chp.title
-      LEFT JOIN lands l
-      ON l.land = chp.location
-      where l.land = $1
-      ORDER BY t.volume, chp.page
-    `,[location]
-    )
     return result
   } catch (error) {
     return error
