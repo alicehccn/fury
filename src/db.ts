@@ -74,7 +74,7 @@ export async function getAllChapters() {
 export async function getChaptersByTitle (slug: string) {
   try {
     const result = await pool.query(`
-      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page, chp.image
       FROM chapters chp
       LEFT JOIN titles t
       ON t.slug = chp.title
@@ -91,7 +91,7 @@ export async function getChaptersByTitle (slug: string) {
 export async function getChaptersByCharacter(name: string) {
   try {
     const result = await pool.query(`
-      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page, chp.image
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role
@@ -110,7 +110,7 @@ export async function getChaptersByCharacter(name: string) {
 export async function getChaptersByLocation(location: string) {
   try {
     const result = await pool.query(`
-      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page
+      SELECT t.title, t.slug, chp.number, chp.pov, chp.suffix, chp.page, chp.headline, chp.location, chp.page, chp.image
       FROM chapters chp
       INNER JOIN roles r
       ON chp.pov = r.role

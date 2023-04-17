@@ -4,4 +4,7 @@ tr
   td(class='align-middle text-muted')=chp.suffix
   td(class='font-italic' style='font-size: 14px')=chp.headline
   td(class='text-right align-middle')
-    a(style='color: #8ab4f8' href='/title/'+chp.slug+'/'+chp.number)=chp.page
+    if chp.image
+      a(style='color: #8ab4f8' href='/title/'+chp.slug+'/'+chp.number)=chp.page
+    else
+      span=chp.page
