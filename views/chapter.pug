@@ -2,7 +2,7 @@ tr
   td(class='align-middle text-muted')=chp.number
   td(class='align-middle text-light')=chp.pov
   td(class='align-middle text-muted')=chp.suffix
-  td(class='font-italic' style='font-size: 14px')=(chp.headline).split(' ').slice(1).join(' ')
+  td(class='font-italic' style='font-size: 14px')=chp.headline ? (chp.headline).split(' ').slice(1).join(' ') : null
   td(class='text-right align-middle')
     if chp.image
       a(style='color: #8ab4f8' href='/title/'+chp.slug+'/'+chp.number)=chp.page
