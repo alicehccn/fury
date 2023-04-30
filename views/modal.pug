@@ -1,14 +1,14 @@
 div(class="modal d-block" tabindex="-1" role="dialog")
   div(class="modal-dialog" role="document" style='top: 10%')
-    div(class="modal-content")
+    div(class="modal-content w-75 w-sm-100" style="margin: auto")
       div(class="modal-header")
-        h3(class='modal-title')
+        h4(class='modal-title')
           if details.character
             a(style='color: #8ab4f8' href='/character/'+details.character)=details.pov
           else
             span=details.pov
         if (details.suffix)
-          h3(class='modal-title ml-2')=details.suffix
+          h4(class='modal-title ml-2')=details.suffix
         button(type="button" class="close" data-dismiss="modal" aria-label="Close")
             a(href='/title/'+slug) &times;
       if details.mentions
